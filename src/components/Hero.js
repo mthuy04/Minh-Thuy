@@ -36,7 +36,7 @@ export default function Hero() {
             <div className="flex flex-col gap-6">
               <div className="flex flex-wrap gap-6">
                 <a href="#projects" className="bg-blue-600 text-white px-10 py-5 rounded-2xl font-black text-[1.2rem] hover:bg-slate-900 transition-all flex items-center gap-3 shadow-lg shadow-blue-100">
-                    View XR Case Study <ArrowRight size={20} />
+                    View Project <ArrowRight size={20} />
                 </a>
                 <a href={cvLink} target="_blank" rel="noopener noreferrer" className="bg-white border-2 border-slate-100 px-10 py-5 rounded-2xl font-black text-[1.2rem] hover:bg-slate-50 transition-all flex items-center gap-3">
                     Download CV <FileText size={20} className="text-blue-600" />
