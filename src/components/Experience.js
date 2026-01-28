@@ -1,20 +1,22 @@
 // src/components/Experience.js
 "use client";
 import { motion } from "framer-motion";
-import { Briefcase, Building2, CheckCircle2, Calendar, Star, Zap, Users } from "lucide-react";
+import { Briefcase, Building2, CheckCircle2, Calendar, Star, Zap, Users, FileText } from "lucide-react";
 
 const experiences = [
   {
-    role: "Operations Team Lead",
-    company: "Homestay & Studio Chain",
+    role: "Operations & Process Lead", // Đổi branding sang Process-focused
+    company: "Our Homestay and Studio",
     period: "Jan 2024 - Present",
-    desc: "Managing a 34-unit premium chain, focusing on process optimization and customer experience excellence.",
+    scope: "Requirement discovery • Process mapping • SOP standards • UAT & Quality metrics",
+    desc: "Managing a 34-unit premium chain, transforming business needs into standardized operational workflows to drive growth.",
     highlights: [
-      "Optimized inventory and housekeeping workflows, maintaining a consistent 85-90% occupancy rate.",
-      "Redesigned check-in protocols, resulting in a 20% reduction in customer wait times.",
-      "Developed SOPs to secure a perfect 5.0/5.0 rating on major OTA platforms.",
-      "Managed recruitment and scheduling while ensuring system-wide operational stability."
-    ]
+      "Mapped end-to-end check-in & housekeeping workflows (handoffs + exceptions) and standardized SOPs, sustaining 85-90% occupancy.",
+      "Redesigned check-in protocols and created an acceptance checklist for staff, reducing customer wait time by 20%.",
+      "Defined service quality KPIs and built a weekly ops dashboard (Sheets/Excel) to secure a perfect 5.0/5.0 rating on OTA platforms.",
+      "Documented incident playbooks (late check-in, overbooking) to reduce rework and improve system-wide consistency."
+    ],
+    deliverables: ["Process Flows", "SOP Documents", "Acceptance Checklists", "KPI Dashboards"]
   }
 ];
 
@@ -44,11 +46,11 @@ export default function Experience() {
               </div>
 
               <div className="bg-slate-50/50 p-10 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-blue-50 transition-all">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                   <div>
                     <h3 className="text-[2.2rem] font-black text-slate-900 leading-tight">{exp.role}</h3>
                     <div className="flex items-center gap-2 text-blue-600 font-bold text-[1.4rem] mt-1">
-                      <Building2 size={18} /> {exp.company}
+                      <Building2 size={18} /> {exp.company} (34 Units)
                     </div>
                   </div>
                   <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-xl border border-slate-100 text-[1.1rem] font-bold text-slate-400">
@@ -56,7 +58,12 @@ export default function Experience() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* SCOPE BADGE */}
+                <p className="text-[1rem] font-black text-blue-600 uppercase tracking-widest mb-8 bg-blue-50 w-fit px-4 py-1.5 rounded-lg border border-blue-100">
+                  Scope: {exp.scope}
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
                   {exp.highlights.map((item, i) => (
                     <div key={i} className="flex items-start gap-3 text-[1.3rem] font-bold text-slate-600 leading-snug">
                       <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
@@ -64,30 +71,43 @@ export default function Experience() {
                     </div>
                   ))}
                 </div>
+
+                {/* DELIVERABLES ROW */}
+                <div className="flex flex-wrap items-center gap-4 pt-8 border-t border-slate-200">
+                  <span className="text-[1rem] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <FileText size={16} /> BA Deliverables:
+                  </span>
+                  {exp.deliverables.map(d => (
+                    <span key={d} className="px-3 py-1 bg-white text-slate-900 text-[0.9rem] font-black rounded-lg border border-slate-200 uppercase">
+                      {d}
+                    </span>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* METRICS BAR */}
+        {/* METRICS BAR - Re-labeled for BA Vibe */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
            <div className="p-8 bg-slate-900 rounded-[2rem] text-center shadow-xl group hover:bg-blue-600 transition-all duration-500">
               <div className="flex justify-center mb-2 text-blue-400 group-hover:text-white"><Users size={24}/></div>
               <div className="text-[3rem] font-black text-white">85-90%</div>
-              <p className="text-[0.9rem] font-bold text-white/50 uppercase tracking-widest mt-2">Occupancy Rate</p>
+              <p className="text-[0.9rem] font-bold text-white/50 uppercase tracking-widest mt-2">Occupancy (Service Ops KPI)</p>
            </div>
            <div className="p-8 bg-white rounded-[2rem] text-center shadow-md border border-slate-100">
               <div className="flex justify-center mb-2 text-blue-600"><Zap size={24}/></div>
               <div className="text-[3rem] font-black text-slate-900">20% ↓</div>
-              <p className="text-[0.9rem] font-bold text-slate-400 uppercase tracking-widest mt-2">Wait Time</p>
+              <p className="text-[0.9rem] font-bold text-slate-400 uppercase tracking-widest mt-2">Wait Time (Process Improvement)</p>
            </div>
            <div className="p-8 bg-slate-900 rounded-[2rem] text-center shadow-xl group hover:bg-blue-600 transition-all duration-500">
               <div className="flex justify-center mb-2 text-blue-400 group-hover:text-white"><Star size={24}/></div>
               <div className="text-[3rem] font-black text-white">5.0/5.0</div>
-              <p className="text-[0.9rem] font-bold text-white/50 uppercase tracking-widest mt-2">User Rating</p>
+              <p className="text-[0.9rem] font-bold text-white/50 uppercase tracking-widest mt-2">OTA Rating (Quality Metric)</p>
            </div>
         </div>
       </div>
+      
     </section>
   );
 }
