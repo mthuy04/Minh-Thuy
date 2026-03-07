@@ -39,7 +39,7 @@ export default function About() {
               </h3>
               <p className="text-[1.45rem] text-slate-500 leading-relaxed font-medium">
                 I’m a 3rd-year <strong className="text-slate-900">MIS (English-taught)</strong> student at VNU-IS with{" "}
-                <strong className="text-slate-900">CGPA 3.53/4.0</strong>. I turn business needs into{" "}
+                <strong className="text-slate-900">CGPA 3.51/4.0</strong>. I turn business needs into{" "}
                 <strong className="text-slate-900">FRD/SRS, user stories, process flows, and UAT-ready deliverables</strong>{" "}
                 for CRM, e-commerce, LMS, and operations-focused systems.{" "}
                 <span className="text-blue-600 font-bold">
