@@ -71,7 +71,7 @@ export default function Education() {
                     <div className="flex items-center gap-3 text-blue-600 mb-2">
                        <Star size={20} strokeWidth={3}/><span className="text-[1rem] font-black uppercase tracking-widest text-slate-400">Academic Standing</span>
                     </div>
-                    <div className="text-[3.5rem] font-black text-slate-900 leading-none">3.53 <span className="text-[1.5rem] text-slate-400">/ 4.0</span></div>
+                    <div className="text-[3.5rem] font-black text-slate-900 leading-none">3.51 <span className="text-[1.5rem] text-slate-400">/ 4.0</span></div>
                     <p className="text-[1.1rem] text-blue-600 font-black mt-3 uppercase tracking-wider italic">High GPA Standing</p>
                   </div>
 

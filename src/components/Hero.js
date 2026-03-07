@@ -103,7 +103,7 @@ export default function Hero() {
         {/* STATS */}
         <div className="bg-white border border-slate-100 rounded-[3rem] p-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
           <div className="md:border-r border-slate-100 last:border-0">
-            <div className="text-[3.8rem] font-black text-slate-900 mb-1 italic">3.53/4.0</div>
+            <div className="text-[3.8rem] font-black text-slate-900 mb-1 italic">3.51/4.0</div>
             <p className="text-[0.9rem] font-bold text-blue-500 uppercase tracking-[0.2em]">
               Current GPA (VNU-IS)
             </p>
