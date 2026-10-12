@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Award, ExternalLink, Github, Info, Lock, CheckCircle2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { BlockList, CustomHeader } from "@/components/CaseStudyBlocks";
 import { caseStudies, getCaseStudy, profile } from "@/data/portfolio";
 
 export const dynamicParams = false;
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }) {
 
 /* ---------- small building blocks ---------- */
 
-function Section({ num, title, children }) {
+function Section({ num, title, highlight, children }) {
   return (
     <section className="py-10 md:py-12 border-t border-slate-100" aria-labelledby={`s-${num}`}>
       <div className="grid md:grid-cols-[180px_1fr] gap-4 md:gap-10">
@@ -46,7 +47,11 @@ function Section({ num, title, children }) {
           <h2 id={`s-${num}`} className="text-[2.4rem] md:text-[2.8rem] font-black tracking-tight text-slate-900 mb-5">
             {title}
           </h2>
-          {children}
+          {highlight ? (
+            <div className="rounded-[2rem] bg-blue-50/60 border border-blue-100 p-6 md:p-8">{children}</div>
+          ) : (
+            children
+          )}
         </div>
       </div>
     </section>
@@ -127,6 +132,41 @@ export default async function CaseStudyPage({ params }) {
   const next = caseStudies[index + 1];
   const keyMetrics = d.keyMetrics || study.metrics;
 
+  // Case studies with their own section blocks (e.g. iHeal) skip the standard template.
+  const sections = d.sections
+    ? d.sections.map((s) => ({ title: s.title, highlight: s.highlight, body: <BlockList blocks={s.body} /> }))
+    : standardSections(d, keyMetrics);
+
+  return (
+    <>
+      <Navbar />
+      <main id="main-content" className="relative bg-white pt-36 md:pt-44 pb-20">
+        <article className="main-container">
+          <Link
+            href="/#case-studies"
+            className="inline-flex items-center gap-2 text-[1.45rem] font-bold text-slate-600 hover:text-blue-600 mb-10"
+          >
+            <ArrowLeft size={16} aria-hidden="true" /> All case studies
+          </Link>
+
+          {d.header ? <CustomHeader study={study} /> : <StandardHeader study={study} />}
+
+          {sections.map((s, i) => (
+            <Section key={s.title} num={String(i + 1).padStart(2, "0")} title={s.title} highlight={s.highlight}>
+              {s.body}
+            </Section>
+          ))}
+
+          {/* Prev / next */}
+          <PrevNext prev={prev} next={next} />
+        </article>
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+function standardSections(d, keyMetrics) {
   const overviewRows = [
     ["Project type", d.overview.type],
     ["Role", d.overview.role],
@@ -138,7 +178,7 @@ export default async function CaseStudyPage({ params }) {
   ].filter(([, v]) => v);
 
   // Build the section list, skipping any that have no content, then number them.
-  const sections = [
+  return [
     {
       title: "Overview",
       body: (
@@ -268,93 +308,77 @@ export default async function CaseStudyPage({ params }) {
     },
     d.takeaways?.length && { title: "Key Takeaways", body: <Bullets items={d.takeaways} /> },
   ].filter(Boolean);
+}
 
+function StandardHeader({ study }) {
+  const d = study.detail;
   return (
-    <>
-      <Navbar />
-      <main id="main-content" className="relative bg-white pt-36 md:pt-44 pb-20">
-        <article className="main-container">
-          <Link
-            href="/#case-studies"
-            className="inline-flex items-center gap-2 text-[1.45rem] font-bold text-slate-600 hover:text-blue-600 mb-10"
-          >
-            <ArrowLeft size={16} aria-hidden="true" /> All case studies
-          </Link>
+    <header className="mb-10 md:mb-12">
+      <p className="text-[1.4rem] md:text-[1.5rem] font-semibold text-blue-700 mb-4">{study.roleLine}</p>
+      <h1 className="text-[3.6rem] sm:text-[4.4rem] md:text-[5.4rem] font-black tracking-tighter leading-[1.05] text-slate-900 mb-6 max-w-[1000px]">
+        {study.title}
+      </h1>
+      <p className="text-[1.75rem] md:text-[1.9rem] text-slate-600 leading-[1.65] max-w-[820px] mb-6">
+        {study.description}
+      </p>
 
-          {/* Header */}
-          <header className="mb-10 md:mb-12">
-            <p className="text-[1.4rem] md:text-[1.5rem] font-semibold text-blue-700 mb-4">{study.roleLine}</p>
-            <h1 className="text-[3.6rem] sm:text-[4.4rem] md:text-[5.4rem] font-black tracking-tighter leading-[1.05] text-slate-900 mb-6 max-w-[1000px]">
-              {study.title}
-            </h1>
-            <p className="text-[1.75rem] md:text-[1.9rem] text-slate-600 leading-[1.65] max-w-[820px] mb-6">
-              {study.description}
-            </p>
+      {(d.notice || study.notice) && (
+        <p className="flex items-start gap-2.5 text-[1.5rem] text-slate-700 bg-amber-50 border border-amber-100 rounded-2xl px-5 py-3.5 max-w-[820px] mb-6">
+          <Info size={17} className="text-amber-600 mt-[0.2rem] shrink-0" aria-hidden="true" />
+          {d.notice || study.notice}
+        </p>
+      )}
 
-            {(d.notice || study.notice) && (
-              <p className="flex items-start gap-2.5 text-[1.5rem] text-slate-700 bg-amber-50 border border-amber-100 rounded-2xl px-5 py-3.5 max-w-[820px] mb-6">
-                <Info size={17} className="text-amber-600 mt-[0.2rem] shrink-0" aria-hidden="true" />
-                {d.notice || study.notice}
-              </p>
-            )}
+      <ul className="flex flex-wrap gap-2" aria-label="Tags">
+        {study.tags.map((t) => (
+          <li key={t} className="px-3 py-1 bg-white text-slate-600 text-[1.3rem] font-semibold rounded-lg border border-slate-200">
+            {t}
+          </li>
+        ))}
+      </ul>
 
-            <ul className="flex flex-wrap gap-2" aria-label="Tags">
-              {study.tags.map((t) => (
-                <li key={t} className="px-3 py-1 bg-white text-slate-600 text-[1.3rem] font-semibold rounded-lg border border-slate-200">
-                  {t}
-                </li>
-              ))}
-            </ul>
-
-            {study.links?.length > 0 && (
-              <div className="flex flex-wrap gap-3 mt-7">
-                {study.links.map((l) => (
-                  <a
-                    key={l.href}
-                    href={l.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2.5 bg-slate-900 hover:bg-blue-600 text-white px-5 py-3 rounded-2xl text-[1.45rem] font-bold transition-colors"
-                  >
-                    {l.href.includes("github.com") ? <Github size={16} aria-hidden="true" /> : <ExternalLink size={16} aria-hidden="true" />}
-                    {l.label}
-                    <span className="sr-only">(opens in a new tab)</span>
-                  </a>
-                ))}
-              </div>
-            )}
-          </header>
-
-          {sections.map((s, i) => (
-            <Section key={s.title} num={String(i + 1).padStart(2, "0")} title={s.title}>
-              {s.body}
-            </Section>
+      {study.links?.length > 0 && (
+        <div className="flex flex-wrap gap-3 mt-7">
+          {study.links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 bg-slate-900 hover:bg-blue-600 text-white px-5 py-3 rounded-2xl text-[1.45rem] font-bold transition-colors"
+            >
+              {l.href.includes("github.com") ? <Github size={16} aria-hidden="true" /> : <ExternalLink size={16} aria-hidden="true" />}
+              {l.label}
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
           ))}
+        </div>
+      )}
+    </header>
+  );
+}
 
-          {/* Prev / next */}
-          <nav aria-label="More case studies" className="mt-6 pt-10 border-t border-slate-100 grid sm:grid-cols-2 gap-4">
-            {prev ? (
-              <Link href={`/case-studies/${prev.slug}`} className="group rounded-[1.8rem] border border-slate-200 p-6 hover:border-blue-300 transition-colors">
-                <span className="flex items-center gap-2 text-[1.3rem] font-bold uppercase tracking-[0.14em] text-slate-500 mb-2">
-                  <ArrowLeft size={14} aria-hidden="true" /> Previous
-                </span>
-                <span className="text-[1.7rem] font-black text-slate-900 group-hover:text-blue-600">{prev.title}</span>
-              </Link>
-            ) : (
-              <span />
-            )}
-            {next && (
-              <Link href={`/case-studies/${next.slug}`} className="group rounded-[1.8rem] border border-slate-200 p-6 hover:border-blue-300 transition-colors sm:text-right">
-                <span className="flex items-center sm:justify-end gap-2 text-[1.3rem] font-bold uppercase tracking-[0.14em] text-slate-500 mb-2">
-                  Next <ArrowRight size={14} aria-hidden="true" />
-                </span>
-                <span className="text-[1.7rem] font-black text-slate-900 group-hover:text-blue-600">{next.title}</span>
-              </Link>
-            )}
-          </nav>
-        </article>
-      </main>
-      <Footer />
-    </>
+function PrevNext({ prev, next }) {
+  return (
+    <nav aria-label="More case studies" className="mt-6 pt-10 border-t border-slate-100 grid sm:grid-cols-2 gap-4">
+      {prev ? (
+        <Link href={`/case-studies/${prev.slug}`} className="group rounded-[1.8rem] border border-slate-200 p-6 hover:border-blue-300 transition-colors">
+          <span className="flex items-center gap-2 text-[1.3rem] font-bold uppercase tracking-[0.14em] text-slate-500 mb-2">
+            <ArrowLeft size={14} aria-hidden="true" /> Previous
+          </span>
+          <span className="text-[1.7rem] font-black text-slate-900 group-hover:text-blue-600">{prev.title}</span>
+        </Link>
+      ) : (
+        <span />
+      )}
+      {next && (
+        <Link href={`/case-studies/${next.slug}`} className="group rounded-[1.8rem] border border-slate-200 p-6 hover:border-blue-300 transition-colors sm:text-right">
+          <span className="flex items-center sm:justify-end gap-2 text-[1.3rem] font-bold uppercase tracking-[0.14em] text-slate-500 mb-2">
+            Next <ArrowRight size={14} aria-hidden="true" />
+          </span>
+          <span className="text-[1.7rem] font-black text-slate-900 group-hover:text-blue-600">{next.title}</span>
+        </Link>
+      )}
+    </nav>
   );
 }

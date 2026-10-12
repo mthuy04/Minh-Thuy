@@ -408,7 +408,298 @@ export const caseStudies = [
     },
   },
 
-  /* 3 ─ SHOPEE ------------------------------------------------------- */
+  /* 3 ─ IHEAL -------------------------------------------------------- */
+  {
+    slug: "iheal-ecommerce-customer-retention-platform",
+    tier: "flagship",
+    featured: true,
+    categories: ["product-ba", "ecommerce-crm", "academic"],
+    title: "iHeal — E-commerce & Customer Retention Platform",
+    roleLine: "Project Planning & Coordination / BA • E-commerce • 2026",
+    description:
+      "Translated iHeal’s marketplace-dependency and customer-retention challenges into an owned WordPress/WooCommerce commerce platform, covering requirements, user journeys, backlog, implementation, and end-to-end validation.",
+    metrics: [
+      { value: "51", label: "Functional Requirements" },
+      { value: "6", label: "Requirement Modules" },
+      { value: "71", label: "Functional Test Cases" },
+      { value: "9", label: "UAT User Groups" },
+    ],
+    tags: ["E-commerce", "Business Analysis", "WooCommerce", "Customer Retention"],
+    links: [{ label: "View Live Website", href: "https://ihealvngroup2.id.vn/" }],
+    detail: {
+      // Custom header + section list (rendered instead of the standard template)
+      header: {
+        role: "Project Planning & Coordination / Business Analysis",
+        subtitle: "From marketplace dependency to an owned commerce and retention channel.",
+        meta: "Capstone Project I • 2026 • 6-person team",
+        institution: "VNU International School — Vietnam National University, Hanoi",
+        timeline: "Late Jan 2026 – Early Jun 2026",
+        techLine: ["WordPress", "WooCommerce", "Jira", "Figma"],
+        secondaryLine: ["8 Delivery Phases", "FR01–FR51", "FT01–FT71"],
+        image: {
+          src: "/images/iheal/iheal-live-homepage.webp",
+          width: 1440,
+          height: 900,
+          alt: "Implemented iHeal homepage built on WordPress/WooCommerce, with navigation, hero banner, product imagery, and the CookieAdmin consent banner",
+          caption: "Implemented iHeal homepage (live site). The cookie-consent banner is the configured CookieAdmin plugin.",
+        },
+      },
+      sections: [
+        {
+          title: "Overview",
+          body: [
+            { kind: "p", text: "iHeal previously relied heavily on marketplaces and social/messaging channels for customer acquisition, sales, product communication, and follow-up." },
+            { kind: "p", text: "While these channels supported reach, they fragmented product information and limited control over customer experience, customer data, SEO visibility, repeat-purchase journeys, and operational monitoring." },
+            { kind: "p", text: "The project therefore developed an owned WordPress/WooCommerce e-commerce and customer-retention platform connecting product discovery, direct purchase, post-purchase engagement, content, and back-office operations." },
+          ],
+        },
+        {
+          title: "My Contribution",
+          highlight: true,
+          body: [
+            { kind: "p", text: "Led project planning and coordination while owning core business-analysis activities including requirement analysis, product backlog management, and user-story development. I also contributed hands-on to WordPress/WooCommerce implementation, plugin selection and configuration, Figma prototype refinement, deployment and hosting, testing review, and final project documentation." },
+            {
+              kind: "groups",
+              columns: 4,
+              groups: [
+                { label: "Analysis", items: ["Requirement Analysis", "Business Problem Analysis", "Backlog Management", "User Stories", "Prioritisation"] },
+                { label: "Product / UX", items: ["Customer Journey", "Information Architecture", "Use Cases", "Prototype Refinement"] },
+                { label: "Implementation", items: ["WordPress", "WooCommerce", "Plugin Configuration", "Deployment / Hosting"] },
+                { label: "Validation", items: ["Functional Testing Review", "UAT", "Requirement Validation", "Issue Review"] },
+              ],
+            },
+            { kind: "note", text: "Team project with 6 students — artifacts were produced collaboratively." },
+          ],
+        },
+        {
+          title: "The Business Problem",
+          body: [
+            {
+              kind: "stages",
+              stages: [
+                { label: "External Channel Dependency", items: ["Shopee", "Social Media", "Messaging Channels"] },
+                { label: "Fragmented Customer Experience", items: ["Scattered product information", "Limited customer-data control", "Weak owned SEO presence", "Limited retention journey", "Fragmented operations"] },
+                { label: "Business Opportunity", text: "Create an owned commerce and customer-retention channel.", accent: true },
+              ],
+            },
+          ],
+        },
+        {
+          title: "From Business Problem to Requirements",
+          body: [
+            {
+              kind: "flow",
+              title: "Analysis sequence",
+              steps: ["Business Context", "Root Cause Analysis", "5 Whys", "Stakeholder Analysis", "User Roles", "Requirements", "MoSCoW Prioritisation", "Requirement Traceability"],
+            },
+            {
+              kind: "groups",
+              columns: 3,
+              groups: [
+                { label: "Problem analysis", items: ["Business Problem Analysis", "Root Cause Analysis", "5 Whys"] },
+                { label: "Stakeholders & roles", items: ["Stakeholder Analysis", "Power / Interest Mapping", "User Role Analysis", "Role / Permission Matrix"] },
+                { label: "Requirements", items: ["Functional Requirements", "Non-functional Requirements", "MoSCoW Prioritisation", "Requirement Traceability"] },
+              ],
+            },
+          ],
+        },
+        {
+          title: "Requirement Architecture",
+          body: [
+            { kind: "metric", value: "51", label: "Functional Requirements", text: "Structured across six business capability modules covering the full customer and operational journey." },
+            {
+              kind: "modules",
+              modules: [
+                { num: "01", title: "Core E-commerce & User Experience", items: ["Product browsing", "Search / filtering", "Product detail", "Cart / checkout", "Orders", "Reviews / returns"] },
+                { num: "02", title: "Customer Account & Convenience", items: ["Registration / login", "Google login", "Account details", "Order history", "Re-order support", "Bilingual access"] },
+                { num: "03", title: "CRM, Engagement & Retention", items: ["Customer support", "Wellness Quiz", "Promotions", "Post-purchase communication", "Re-order", "Loyalty / membership"] },
+                { num: "04", title: "Knowledge Hub & Product Education", items: ["Educational content", "Product guidance", "Content management", "Responsible communication"] },
+                { num: "05", title: "Operations & Administration", items: ["Products", "Orders", "Inventory", "Coupons", "Content", "Email", "Security"] },
+                { num: "06", title: "Marketing & Growth", items: ["SEO", "Analytics", "Campaign content", "Bilingual content", "Trust/policy communication"] },
+              ],
+            },
+            { kind: "inline", items: ["FR01–FR51", "MoSCoW prioritisation", "Requirement traceability"] },
+          ],
+        },
+        {
+          title: "From Requirements to Product Design",
+          body: [
+            {
+              kind: "flow",
+              title: "Customer journey",
+              steps: ["Discover", "Browse / Compare", "Guided Selection", "Product Detail", "Cart", "Checkout", "Account / Order Tracking", "Repeat Purchase"],
+            },
+            {
+              kind: "groups",
+              columns: 3,
+              groups: [
+                { label: "Information architecture", items: ["Public sitemap", "Back-office sitemap", "Content / data structure"] },
+                { label: "Journeys & use cases", items: ["Customer journey", "Use-case diagram", "Customer-facing use cases", "Back-office / admin use cases"] },
+                { label: "Interface design", items: ["Low-fidelity wireframes", "High-fidelity Figma prototype"] },
+              ],
+            },
+            {
+              kind: "images",
+              images: [
+                { src: "/images/iheal/iheal-sitemap.webp", width: 1800, height: 799, title: "Sitemap & information architecture", desc: "Customer-facing sitemap and internal back-office sitemap, with the discovery, retention, and operational flows.", alt: "iHeal sitemap split into the public website (Home, Shop, Guided Discovery, Knowledge Hub, My Account) and back-office areas (WooCommerce, Marketing, Customer Retention, Operations, Security & Analytics)" },
+                { src: "/images/iheal/iheal-customer-journey.webp", width: 3067, height: 515, title: "Customer journey flow", desc: "From awareness and website visit through discovery, guided choice, purchase, order follow-up, and retention.", alt: "Customer journey flow for the iHeal website from awareness to retention, with support and content-to-commerce touchpoints", zoom: true },
+                { src: "/images/iheal/iheal-content-data-structure.webp", width: 1523, height: 419, title: "Content & data structure", desc: "Product, order, content/SEO, customer/retention, and operational data on WordPress + WooCommerce.", alt: "Content and data structure of the iHeal WordPress and WooCommerce website grouped into product, order, content and SEO, customer and retention, and plugin settings data" },
+              ],
+            },
+          ],
+        },
+        {
+          title: "From Prototype to Working Platform",
+          body: [
+            { kind: "p", text: "The project went beyond requirements and Figma into a working WordPress/WooCommerce implementation, organised into five capability groups." },
+            {
+              kind: "groups",
+              columns: 5,
+              groups: [
+                { label: "Commerce", items: ["Product Catalogue", "Product Detail", "Cart", "Checkout", "Order Creation", "Order Confirmation"] },
+                { label: "Discovery", items: ["Product Categories", "Search / Filter", "Mix & Save", "Wellness Quiz / Product Finder", "Knowledge Hub"] },
+                { label: "Retention", items: ["Customer Accounts", "Order History", "Coupons", "iHeal Points", "Membership Tiers", "Re-order Reminder", "Birthday Voucher Preparation"] },
+                { label: "Operations", items: ["Product Management", "Order Management", "Customer Management", "Inventory", "Low-stock Thresholds", "Backorders", "Cost Information", "Expiry Attributes", "Shipment Tracking"] },
+                { label: "Growth & Trust", items: ["SEO", "Analytics", "VI/EN Content", "Email Delivery", "Security", "Privacy"] },
+              ],
+            },
+            {
+              kind: "stack",
+              title: "Implementation stack",
+              rows: [
+                { label: "Core", items: ["WordPress", "WooCommerce", "Elementor"] },
+                { label: "Product / Project", items: ["Figma", "Jira"] },
+                { label: "E-commerce / Retention", items: ["WPC Product Bundles", "Nextend Social Login", "Easy Re-Order Reminder", "Advanced Shipment Tracking"] },
+                { label: "Marketing / Analytics", items: ["Rank Math SEO", "Rank Math Content AI", "Google Site Kit", "GA4", "WooCommerce Analytics"] },
+                { label: "Localisation / Communication", items: ["TranslatePress", "WP Mail SMTP"] },
+                { label: "Security / Privacy", items: ["Wordfence", "reCAPTCHA", "CookieAdmin"] },
+              ],
+            },
+          ],
+        },
+        {
+          title: "Delivery Lifecycle",
+          body: [
+            {
+              kind: "flow",
+              title: "8 delivery phases",
+              steps: [
+                "Project Setup & Initial Planning",
+                "Requirement Analysis",
+                "System Design & Prototype",
+                "Core WordPress Development",
+                "Midterm Review & Refinement",
+                "Feature & Content Enhancement",
+                "Plugin & Operational Configuration",
+                "Testing, Evidence Collection & Final Documentation",
+              ],
+            },
+            { kind: "p", text: "Jira was used for task tracking, responsibility assignment, and timeline monitoring." },
+            {
+              kind: "images",
+              images: [
+                { src: "/images/iheal/iheal-jira-timeline.webp", width: 1600, height: 1668, title: "Jira timeline", desc: "The 8 phases as Jira work items with their tasks and timeline (team member names redacted).", alt: "Jira timeline listing the eight iHeal phases IHEAL-1 to IHEAL-8 with their tasks and status from February to May", narrow: true },
+              ],
+            },
+          ],
+        },
+        {
+          title: "Testing & Validation",
+          body: [
+            { kind: "metric", value: "71", label: "Documented Functional Test Cases", text: "Functional testing covered the complete implemented scope, traced as FT01–FT71." },
+            {
+              kind: "chips",
+              label: "Functional testing scope",
+              items: ["Homepage and navigation", "Product catalogue", "Product detail", "Mix & Save", "Wellness Quiz", "Knowledge Hub", "Cart", "Checkout", "Order confirmation", "Account / login", "Order history", "Tracking", "Reviews", "Returns / refunds", "Chatbot / support", "Retention features", "Back-office management", "SEO", "Analytics", "Bilingual functionality", "Email", "Security", "Privacy"],
+            },
+            {
+              kind: "chips",
+              label: "Non-functional testing",
+              items: ["Usability", "Responsiveness", "Performance", "Security", "Privacy", "Maintainability", "SEO readiness", "Analytics readiness", "Bilingual support", "Email reliability", "Responsible supplement communication"],
+            },
+          ],
+        },
+        {
+          title: "User Acceptance Testing",
+          body: [
+            { kind: "metric", value: "9", label: "User / Stakeholder Groups" },
+            {
+              kind: "numbered",
+              items: ["Guest Visitor", "Supplement Shopper", "Guided-choice Customer", "Registered Customer", "Returning Customer", "Sales Staff", "Marketing Staff", "Admin / Shop Manager", "Business Owner"],
+            },
+            { kind: "outcome", text: "All documented UAT scenarios for the nine listed user/stakeholder groups were recorded as Accepted." },
+          ],
+        },
+        {
+          title: "Delivery Evidence",
+          body: [
+            {
+              kind: "blocks",
+              blocks: [
+                { value: "51", title: "Requirements", copy: "Structured business and system needs across six functional modules." },
+                { value: "71", title: "Functional Tests", copy: "Validated customer-facing, e-commerce, retention, operational, and supporting-tool workflows." },
+                { value: "9", title: "UAT Groups", copy: "Acceptance scenarios covered both customer journeys and internal business users." },
+                { value: "Working", title: "Platform", copy: "Delivered an implemented WordPress/WooCommerce platform rather than a design-only prototype." },
+              ],
+            },
+          ],
+        },
+        {
+          title: "Business Value Enabled",
+          body: [
+            {
+              kind: "blocks",
+              blocks: [
+                { title: "Owned Digital Channel", copy: "Created a central brand-owned destination complementing marketplaces and social channels." },
+                { title: "Product Discovery", copy: "Structured product browsing, filtering, bundles, guided selection, and educational content." },
+                { title: "Customer Trust", copy: "Supported product information, reviews, FAQs, responsible content, educational resources, and customer-support touchpoints." },
+                { title: "Customer Retention", copy: "Supported customer accounts, order history, coupons, points, membership, and re-order journeys." },
+                { title: "Operational Control", copy: "Provided back-office management for products, orders, customers, inventory, content, SEO, analytics, security, and website operations." },
+              ],
+            },
+          ],
+        },
+        {
+          title: "Skills Demonstrated",
+          body: [
+            {
+              kind: "groups",
+              columns: 5,
+              groups: [
+                { label: "Business Analysis", items: ["Requirement Analysis", "Stakeholder Analysis", "Root Cause Analysis", "5 Whys", "Functional Requirements", "Non-functional Requirements", "MoSCoW Prioritisation", "Requirement Traceability", "Role / Permission Analysis"] },
+                { label: "Product & UX", items: ["Product Backlog", "User Stories", "Customer Journey Mapping", "Information Architecture", "Sitemap Design", "Use Cases", "Wireframes", "Prototype Refinement"] },
+                { label: "E-commerce / CRM", items: ["Product Discovery", "Checkout Journey", "Customer Accounts", "Order Tracking", "Loyalty / Points", "Membership", "Re-order", "Customer Retention"] },
+                { label: "Testing & Delivery", items: ["Jira", "Functional Testing", "UAT", "Requirement Validation", "Issue Review", "Deployment", "Hosting"] },
+                { label: "Technical / Growth", items: ["WordPress", "WooCommerce", "Figma", "SEO", "GA4 / Analytics", "Bilingual VI/EN", "Security / Privacy"] },
+              ],
+            },
+          ],
+        },
+        {
+          title: "Current Scope & Limitations",
+          muted: true,
+          body: [
+            {
+              kind: "bullets",
+              items: [
+                "No full marketplace synchronisation",
+                "No advanced CRM automation",
+                "No subscription billing",
+                "No advanced AI personalisation",
+                "No full real-time logistics carrier API",
+                "Plugin-dependent architecture",
+                "Birthday automation only partially implemented — a future enhancement",
+                "Testing conducted within an academic-project context",
+              ],
+            },
+            { kind: "note", text: "The platform deliberately does not provide medical diagnosis or treatment recommendations." },
+          ],
+        },
+      ],
+    },
+  },
+
+  /* 4 ─ SHOPEE ------------------------------------------------------- */
   {
     slug: "shopee-ecommerce-sales-management-system",
     tier: "flagship",
@@ -518,7 +809,7 @@ export const caseStudies = [
     },
   },
 
-  /* 4 ─ LIVLAB ------------------------------------------------------- */
+  /* 5 ─ LIVLAB ------------------------------------------------------- */
   {
     slug: "livlab-ai-home-living-platform",
     tier: "flagship",
@@ -635,7 +926,7 @@ export const caseStudies = [
     },
   },
 
-  /* 5 ─ S-TECH / REALERP --------------------------------------------- */
+  /* 6 ─ S-TECH / REALERP --------------------------------------------- */
   {
     slug: "realerp-booking-online-system",
     tier: "supporting",
@@ -728,10 +1019,10 @@ export const caseStudies = [
     },
   },
 
-  /* 6 ─ GAG ---------------------------------------------------------- */
+  /* 7 ─ GAG ---------------------------------------------------------- */
   {
     slug: "gag-gender-age-group-classification",
-    tier: "supporting",
+    tier: "secondary",
     featured: true,
     categories: ["ai-data", "academic"],
     title: "GAG — Gender & Age Group Classification",
@@ -833,7 +1124,7 @@ export const caseStudies = [
     },
   },
 
-  /* 7 ─ HOUSING ------------------------------------------------------ */
+  /* 8 ─ HOUSING ------------------------------------------------------ */
   {
     slug: "housing-price-prediction",
     tier: "secondary",
@@ -909,7 +1200,7 @@ export const caseStudies = [
     },
   },
 
-  /* 8 ─ MED3DVLM ----------------------------------------------------- */
+  /* 9 ─ MED3DVLM ----------------------------------------------------- */
   {
     slug: "med3dvlm-adaptation",
     tier: "secondary",
@@ -983,7 +1274,7 @@ export const caseStudies = [
     },
   },
 
-  /* 9 ─ COCOON ------------------------------------------------------- */
+  /* 10 ─ COCOON ------------------------------------------------------- */
   {
     slug: "cocoon-crm-solution-design",
     tier: "secondary",
@@ -1089,6 +1380,9 @@ export const skills = {
         "Business Rules",
         "Backlog / MVP Prioritization",
         "Requirement Traceability",
+        "Stakeholder Analysis",
+        "Root Cause Analysis",
+        "MoSCoW Prioritisation",
       ],
     },
     {
@@ -1103,6 +1397,8 @@ export const skills = {
         "Data Mapping",
         "Role / Permission Analysis",
         "REST API / Integration Analysis",
+        "Customer Journey Mapping",
+        "Information Architecture",
       ],
     },
     {
@@ -1131,6 +1427,7 @@ export const skills = {
         "Figma",
         "Excel / Google Sheets",
         "Git / GitHub",
+        "WordPress / WooCommerce",
       ],
     },
   ],
