@@ -1,4 +1,6 @@
 // src/components/Contact.js
+"use client";
+import { motion } from "framer-motion";
 import { Mail, Phone, Linkedin, Github, ArrowUpRight, FileText, MapPin, Briefcase, Languages } from "lucide-react";
 import { contact, contactSection, profile } from "@/data/portfolio";
 
@@ -13,68 +15,90 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="bg-dark text-[#f8fafc] pt-24 md:pt-32 pb-20 md:pb-24">
-      <div className="main-container grid lg:grid-cols-[1.25fr_1fr] gap-14 lg:gap-24">
-        {/* Message + CTAs */}
-        <div>
-          <p className="eyebrow !text-dark-muted mb-5">Let&apos;s Connect</p>
-          <h2 className="text-[3.4rem] md:text-[4.4rem] font-[680] tracking-[-0.03em] leading-[1.1] text-white mb-6">
-            Hiring for a BA or Product Analyst role?
+    <section id="contact" className="py-24 md:py-28 relative overflow-hidden">
+      <div className="main-container">
+        <div className="flex flex-col items-center mb-14 text-center">
+          <p className="eyebrow mb-3">Contact</p>
+          <h2 className="text-[4rem] md:text-[5.6rem] font-black tracking-tighter text-slate-900 leading-none mb-7">
+            Let&apos;s <span className="text-blue-600">Connect.</span>
           </h2>
-          <p className="text-[1.7rem] font-medium text-[#f8fafc] mb-3">{contactSection.positioning}</p>
-          <p className="text-[1.65rem] text-dark-text leading-[1.7] max-w-[60rem] mb-7">{contactSection.intro}</p>
+          <p className="text-[1.8rem] md:text-[2.1rem] text-slate-900 font-black leading-tight mb-4">
+            {contactSection.positioning}
+          </p>
+          <p className="max-w-[680px] text-[1.7rem] text-slate-600 leading-relaxed">{contactSection.intro}</p>
 
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 mb-10">
+          <ul className="flex flex-wrap justify-center gap-3 mt-8">
             {contactSection.badges.map((b, i) => {
               const Icon = BADGE_ICONS[i];
               return (
-                <li key={b} className="flex items-center gap-2 text-[1.4rem] text-dark-text">
-                  <Icon size={15} className="text-dark-muted" aria-hidden="true" /> {b}
+                <li
+                  key={b}
+                  className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-full text-[1.4rem] font-semibold text-slate-700"
+                >
+                  <Icon size={15} className="text-blue-600" aria-hidden="true" /> {b}
                 </li>
               );
             })}
           </ul>
-
-          <div className="flex flex-wrap gap-3">
-            <a href={contact.emailHref} className="btn-primary">
-              <Mail size={17} aria-hidden="true" /> Email Me
-            </a>
-            <a
-              href={profile.cvUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 rounded-btn border border-white/20 px-7 py-[1.3rem] text-[1.55rem] font-semibold text-white transition-colors duration-200 hover:bg-white/5"
-            >
-              <FileText size={17} aria-hidden="true" /> Download CV
-            </a>
-          </div>
         </div>
 
-        {/* Contact rows */}
-        <div className="lg:pt-12">
-          <p className="text-[1.45rem] text-dark-muted mb-4">Reach me by email or phone, or connect on LinkedIn.</p>
-          <ul className="border-t border-white/10">
+        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8 items-stretch">
+          {/* Contact channels */}
+          <ul className="grid grid-cols-1 gap-4">
             {channels.map((c) => {
               const Icon = c.icon;
               return (
-                <li key={c.label} className="border-b border-white/10">
-                  <a
+                <li key={c.label}>
+                  <motion.a
                     href={c.href}
                     {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="group flex items-center gap-4 py-5"
+                    whileHover={{ y: -4 }}
+                    className="group flex items-center justify-between gap-4 h-full p-6 bg-white/90 border border-slate-100 rounded-[2rem] hover:shadow-2xl hover:shadow-blue-100 transition-shadow"
                   >
-                    <Icon size={18} className="text-dark-muted shrink-0" aria-hidden="true" />
-                    <span className="sr-only sm:not-sr-only sm:w-[8.5rem] sm:shrink-0 text-[1.35rem] text-dark-muted">{c.label}</span>
-                    <span className="flex-1 min-w-0 text-[1.55rem] font-medium text-white break-words group-hover:text-[#c7d4fb] transition-colors">
-                      {c.value}
-                    </span>
-                    <ArrowUpRight size={16} className="text-dark-muted group-hover:text-white transition-colors shrink-0" aria-hidden="true" />
+                    <div className="flex items-center gap-4 min-w-0">
+                      <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center shrink-0" aria-hidden="true">
+                        <Icon size={20} />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-[1.25rem] font-bold uppercase tracking-[0.14em] text-slate-500 mb-0.5">{c.label}</p>
+                        <p className="text-[1.55rem] font-black text-slate-900 leading-snug break-words">{c.value}</p>
+                      </div>
+                    </div>
+                    <ArrowUpRight size={18} className="text-slate-400 group-hover:text-blue-600 transition-colors shrink-0" aria-hidden="true" />
                     {c.external && <span className="sr-only">(opens in a new tab)</span>}
-                  </a>
+                  </motion.a>
                 </li>
               );
             })}
           </ul>
+
+          {/* Email CTA */}
+          <div className="p-8 md:p-10 bg-slate-900 rounded-[2.4rem] text-white shadow-2xl flex flex-col justify-between gap-8">
+            <div>
+              <h3 className="text-[2.4rem] md:text-[2.8rem] font-black tracking-tight leading-tight mb-3">
+                Hiring for a BA or Product Analyst role?
+              </h3>
+              <p className="text-[1.55rem] text-slate-300 leading-relaxed">
+                Reach me by email or phone, or connect on LinkedIn.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3">
+              <a
+                href={contact.emailHref}
+                className="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-4 px-6 rounded-2xl font-black text-[1.55rem] flex items-center justify-center gap-3 transition-colors"
+              >
+                <Mail size={18} aria-hidden="true" /> Email Me
+              </a>
+              <a
+                href={profile.cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 bg-white/10 hover:bg-white/20 border border-white/20 text-white py-4 px-6 rounded-2xl font-black text-[1.55rem] flex items-center justify-center gap-3 transition-colors"
+              >
+                <FileText size={18} aria-hidden="true" /> Download CV
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

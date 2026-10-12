@@ -18,7 +18,7 @@ export default function OpengraphImage() {
           justifyContent: "space-between",
           padding: "72px 80px",
           background: "#ffffff",
-          color: "#111827",
+          color: "#0f172a",
           fontFamily: "sans-serif",
         }}
       >
@@ -27,7 +27,7 @@ export default function OpengraphImage() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", fontSize: 26, fontWeight: 700, color: "#3157d5", marginBottom: 18 }}>
+          <div style={{ display: "flex", fontSize: 26, fontWeight: 700, color: "#2563eb", marginBottom: 18 }}>
             {profile.positioning}
           </div>
           <div style={{ display: "flex", fontSize: 76, fontWeight: 900, letterSpacing: -3, lineHeight: 1.05 }}>

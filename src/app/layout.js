@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className} relative min-h-screen`}>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-cobalt focus:text-white focus:px-6 focus:py-3 focus:rounded-btn focus:text-[1.5rem] focus:font-bold"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-blue-600 focus:text-white focus:px-6 focus:py-3 focus:rounded-xl focus:text-[1.5rem] focus:font-bold"
         >
           Skip to content
         </a>
