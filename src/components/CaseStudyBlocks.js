@@ -4,6 +4,9 @@
 import Image from "next/image";
 import { ArrowDown, ArrowRight, CheckCircle2, ExternalLink, Github, Info, Maximize2 } from "lucide-react";
 
+// Colour + letter, never colour alone
+const RACI_TONE = { R: "text-blue-700", A: "text-slate-900", C: "text-slate-600", I: "text-slate-500" };
+
 const GROUP_COLS = {
   3: "sm:grid-cols-2 lg:grid-cols-3",
   4: "sm:grid-cols-2 xl:grid-cols-4",
@@ -176,13 +179,59 @@ function Block({ b }) {
         <ol className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {b.items.map((it, i) => (
             <li key={it} className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white px-5 py-4">
-              <span className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 text-[1.4rem] font-black flex items-center justify-center shrink-0">
-                {i + 1}
+              <span className="min-w-9 h-9 px-2 rounded-xl bg-blue-50 text-blue-600 text-[1.4rem] font-black flex items-center justify-center shrink-0">
+                {b.prefix ? `${b.prefix}${i + 1}` : i + 1}
               </span>
               <span className="text-[1.55rem] font-semibold text-slate-800">{it}</span>
             </li>
           ))}
         </ol>
+      );
+
+    case "table":
+      return (
+        <figure className="rounded-[2rem] border border-slate-200 bg-white overflow-hidden">
+          {b.caption && (
+            <figcaption className="px-6 py-4 bg-slate-50 border-b border-slate-100 text-[1.3rem] font-bold uppercase tracking-[0.14em] text-slate-600">
+              {b.caption}
+            </figcaption>
+          )}
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[640px] text-left border-collapse">
+              <thead>
+                <tr className="border-b border-slate-200">
+                  {b.columns.map((c, i) => (
+                    <th
+                      key={c}
+                      scope="col"
+                      className={`px-4 py-3 text-[1.25rem] font-bold text-slate-600 align-bottom ${i === 0 ? "min-w-[240px]" : "text-center"}`}
+                    >
+                      {c}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {b.rows.map((r) => (
+                  <tr key={r[0]} className="border-b border-slate-100 last:border-0">
+                    {r.map((cell, i) =>
+                      i === 0 ? (
+                        <th key={i} scope="row" className="px-4 py-3 text-[1.4rem] font-semibold text-slate-800">
+                          {cell}
+                        </th>
+                      ) : (
+                        <td key={i} className={`px-4 py-3 text-[1.4rem] ${b.center === false ? "text-slate-700" : "text-center font-black"} ${RACI_TONE[cell] || "text-slate-700"}`}>
+                          {cell || <span className="text-slate-300" aria-label="none">–</span>}
+                        </td>
+                      )
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {b.legend && <p className="px-6 py-4 border-t border-slate-100 text-[1.35rem] text-slate-600">{b.legend}</p>}
+        </figure>
       );
 
     case "outcome":
@@ -285,9 +334,7 @@ export function CustomHeader({ study }) {
       </h1>
       <p className="text-[1.9rem] md:text-[2.2rem] text-slate-600 font-medium leading-[1.5] max-w-[820px] mb-5">{h.subtitle}</p>
       <p className="text-[1.5rem] font-bold text-slate-900">{h.meta}</p>
-      <p className="text-[1.4rem] text-slate-500 mt-1 mb-8">
-        {h.institution} • {h.timeline}
-      </p>
+      <p className="text-[1.4rem] text-slate-500 mt-1 mb-8">{[h.institution, h.timeline].filter(Boolean).join(" • ")}</p>
 
       {/* Primary metrics */}
       <dl className="flex flex-wrap gap-3 mb-5">
@@ -300,7 +347,7 @@ export function CustomHeader({ study }) {
       </dl>
 
       <p className="text-[1.5rem] font-black text-slate-800 mb-1">{h.techLine.join(" • ")}</p>
-      <p className="text-[1.35rem] font-semibold text-slate-500">{h.secondaryLine.join(" • ")}</p>
+      {h.secondaryLine && <p className="text-[1.35rem] font-semibold text-slate-500">{h.secondaryLine.join(" • ")}</p>}
 
       {study.links?.length > 0 && (
         <div className="flex flex-wrap gap-3 mt-7">
@@ -331,7 +378,20 @@ export function CustomHeader({ study }) {
             sizes="(min-width: 1280px) 1130px, 100vw"
             className="w-full h-auto"
           />
-          <figcaption className="px-6 py-4 border-t border-slate-100 text-[1.4rem] text-slate-600">{h.image.caption}</figcaption>
+          <figcaption className="px-6 py-4 border-t border-slate-100 text-[1.4rem] text-slate-600 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+            <span>{h.image.caption}</span>
+            {h.image.zoom && (
+              <a
+                href={h.image.src}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[1.4rem] font-bold text-blue-600 hover:text-slate-900 whitespace-nowrap"
+              >
+                <Maximize2 size={14} aria-hidden="true" /> Open full size
+                <span className="sr-only">(opens in a new tab)</span>
+              </a>
+            )}
+          </figcaption>
         </figure>
       )}
     </header>

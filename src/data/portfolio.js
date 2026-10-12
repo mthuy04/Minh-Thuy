@@ -699,112 +699,193 @@ export const caseStudies = [
     },
   },
 
-  /* 4 ─ SHOPEE ------------------------------------------------------- */
+  /* 4 ─ SHOPEE / EIS -------------------------------------------------- */
   {
     slug: "shopee-ecommerce-sales-management-system",
     tier: "flagship",
     featured: true,
-    categories: ["ecommerce-crm", "academic"],
+    categories: ["product-ba", "ecommerce-crm", "academic"],
     title: "E-commerce Sales Management System for a Shopee Marketplace Seller",
-    roleLine: "Team Leader • E-commerce / Enterprise Information Systems • 2025",
+    roleLine: "Team Leader • Enterprise Information Systems / E-commerce • 2025",
     description:
-      "Designed an end-to-end e-commerce operating model covering order import, sales confirmation, inventory reservation, warehouse fulfillment, logistics, returns, payout reconciliation, and reporting.",
+      "Modelled and implemented an internal sales management system for a Shopee marketplace seller, translating an 11-stage order-to-payout lifecycle into structured process flows, REA/ERD models, database controls, and a working PHP/MySQL backend.",
     metrics: [
+      { value: "11", label: "Process Stages" },
       { value: "6", label: "Swimlanes" },
-      { value: "6", label: "Database Triggers" },
+      { value: "8", label: "REA Events" },
+      { value: "6", label: "SQL Triggers" },
     ],
-    tags: ["E-commerce", "REA", "ERD", "MySQL", "Process Design"],
+    tags: ["E-commerce", "Process Modelling", "REA / ERD", "MySQL"],
     links: [
       { label: "GitHub repository", href: "https://github.com/mthuy04/Sale-Management-System-for-Shopee-Seller" },
       { label: "Project report", href: "https://drive.google.com/file/d/1tqGUUYLmuTCLznEYKfGAVVayiNz6MDrJ/view" },
     ],
     detail: {
-      overview: {
-        type: "Academic project — Enterprise Information Systems",
+      header: {
         role: "Team Leader",
+        subtitle: "From fragmented marketplace operations to an integrated order, inventory, fulfillment, and reporting system.",
+        meta: "Enterprise Information Systems / E-commerce • 2025",
         timeline: "Nov 2025 – Dec 2025",
-        scope:
-          "Order-to-payout operating model for a Shopee marketplace seller: process, data model, and MySQL implementation",
+        techLine: ["MySQL", "PHP 8", "XAMPP", "Bootstrap", "HTML/CSS"],
+        secondaryLine: ["S1–S11 business lifecycle", "E1–E8 REA events", "Simulated Shopee API sync"],
+        image: {
+          src: "/images/projects/eis/eis-dashboard.webp",
+          width: 1600,
+          height: 904,
+          alt: "HappyHome seller admin dashboard showing orders awaiting confirmation and shipment, daily revenue, returns, recent order status changes, and a Shopee sync panel",
+          caption: "Dashboard — Working PHP/MySQL backend demonstrating order status, daily revenue, returns, and Shopee-order synchronisation flow.",
+          zoom: true,
+        },
       },
-      context: [
-        "A marketplace seller on Shopee runs orders through a chain of steps — from importing marketplace orders to reconciling payouts — that touch sales, warehouse, logistics, and finance.",
-      ],
-      problem: [
-        "Orders, stock, and payouts move between the marketplace and the seller’s internal operations. Without controls, stock can be oversold, order states can drift, and payouts can be hard to reconcile against orders and returns.",
-      ],
-      role: {
-        owned: [
-          "Led the team as Team Leader and coordinated the end-to-end design across process, data, and database layers",
-        ],
-        contributed: [
-          "Process model (6 swimlanes), REA model, ERD, and relational schema",
-          "MySQL implementation: SQL queries, stored procedures, and 6 database triggers",
-        ],
-        others: ["Academic team project."],
-      },
-      discovery: [
-        "Mapped the order lifecycle across sales, warehouse, logistics, returns, and finance",
-        "Identified control points where inventory and order state must be enforced by the system",
-      ],
-      design: {
-        flows: [
-          {
-            title: "Order-to-payout workflow",
-            steps: [
-              "Order Import",
-              "Sales Confirmation",
-              "Inventory Reservation",
-              "Warehouse Fulfillment",
-              "Logistics",
-              "Returns",
-              "Payout Reconciliation",
-              "Reporting",
-            ],
-          },
-        ],
-        bullets: [
-          "6-swimlane process model across the participating roles/systems",
-          "REA (Resource–Event–Agent) model of the business events",
-          "ERD and relational schema derived from the REA model",
-        ],
-      },
-      requirements: [
-        "REA model",
-        "ERD and relational schema",
-        "Process model with 6 swimlanes",
-        "Inventory and order-state control rules",
-      ],
-      technical: [
-        { title: "MySQL schema", desc: "Relational schema implementing the REA/ERD design." },
-        { title: "SQL queries & stored procedures", desc: "Operational and reporting logic." },
-        { title: "6 database triggers", desc: "Enforce inventory controls and order-state controls at the database level." },
-      ],
-      validation: [
-        "Trigger logic used to enforce inventory and order-state rules automatically",
-        "Reporting queries over the implemented schema",
-      ],
-      outcome: [
-        "End-to-end operating model from order import to payout reconciliation and reporting",
-        "6 swimlanes and 6 database triggers implementing the control logic",
-      ],
-      artifacts: [
+      sections: [
         {
-          title: "Seller admin dashboard",
-          desc: "Order states, Shopee order sync, and operational queues in the implemented system.",
-          image: { src: "/images/shopee-admin-dashboard.webp", width: 1600, height: 904, alt: "Seller admin dashboard showing pending and to-ship orders, daily revenue, returns, recent order state changes, and a Shopee sync panel" },
+          title: "The Business Problem",
+          body: [
+            { kind: "p", text: "Marketplace platforms provide order and payout functionality, but sellers can still lack an integrated internal view of orders, inventory, returns, fees, and operational reporting." },
+            { kind: "p", text: "The project therefore designed a Sales Management System that centralises operational data and connects the full lifecycle from Shopee order intake to inventory allocation, warehouse fulfillment, return handling, financial reconciliation, and management reporting." },
+            {
+              kind: "chips",
+              label: "Main pain points",
+              items: ["Spreadsheet dependence", "Fragmented information", "Delayed order visibility", "Lack of structured stock reservation", "Overselling risk", "Manual fee reconciliation", "Weak management visibility"],
+            },
+          ],
         },
         {
-          title: "Sales performance report",
-          desc: "Revenue trend, best-selling products, and order fulfillment status from the reporting layer.",
-          image: { src: "/images/shopee-sales-dashboard.webp", width: 1600, height: 914, alt: "Sales performance report with monthly revenue trend, top 5 best-selling products, and order fulfillment status breakdown" },
+          title: "My Role",
+          body: [
+            {
+              kind: "groups",
+              columns: 3,
+              groups: [
+                { label: "Led", items: ["Team Leader", "Coordinated the end-to-end design across process, data, and database layers"] },
+                { label: "Contributed to", items: ["Process model (6 swimlanes)", "REA model, ERD, and relational schema", "MySQL implementation and 6 database triggers"] },
+                { label: "Context", items: ["Academic team project"] },
+              ],
+            },
+          ],
         },
-        { title: "REA model, ERD & relational schema", desc: "Documented in the project report and repository." },
-        { title: "Stored procedures & triggers", desc: "MySQL source in the GitHub repository." },
-      ],
-      takeaways: [
-        "Starting from REA made the ERD follow real business events (orders, shipments, returns, payouts) instead of screens.",
-        "Putting inventory and order-state rules in triggers means the controls hold no matter which process step writes the data.",
-        "Payout reconciliation only works if returns and order states are modelled cleanly upstream.",
+        {
+          title: "End-to-End Business Process",
+          body: [
+            { kind: "p", text: "The modelled lifecycle runs through eleven stages, S1–S11, from the customer’s Shopee order to management reporting." },
+            {
+              kind: "flow",
+              title: "S1–S11 order-to-report lifecycle",
+              steps: ["Customer Order & Payment", "Order Import", "Order Validation", "Sales Order & Inventory Reservation", "Picking List", "Pick & Pack", "Post Goods Issue", "Delivery Status", "Returns", "Payout & Shopee Fees", "Management Reporting"],
+            },
+          ],
+        },
+        {
+          title: "Six-Lane System Flow",
+          body: [
+            {
+              kind: "numbered",
+              items: ["Customer / Shopee Platform", "Sales / Shopee Admin", "Sales Management System", "Warehouse & Packing", "Logistics Partner", "Accounting / Owner"],
+            },
+            { kind: "inline", items: ["Responsibility", "Handoffs", "System boundaries", "Document creation", "Operational decisions", "Data movement"] },
+            {
+              kind: "images",
+              images: [
+                { src: "/images/projects/eis/eis-system-flowchart.webp", width: 1821, height: 1171, title: "System Flowchart", desc: "Six-lane system flow connecting marketplace, sales, system, warehouse, logistics, and accounting activities.", alt: "Six-lane system flowchart: Customer/Shopee Platform, Sales/Shopee Admin, Sales Management System, Warehouse & Packing, Logistics Partner, and Accounting/Owner, from order placement to sales and inventory reports", zoom: true },
+              ],
+            },
+          ],
+        },
+        {
+          title: "From Business Events to Enterprise Data",
+          body: [
+            { kind: "p", text: "The project applied Resource–Event–Agent modelling before database implementation, so the data model follows real business events rather than screens." },
+            {
+              kind: "numbered",
+              prefix: "E",
+              items: ["Import Shopee Order", "Confirm Sales Order", "Reserve Inventory", "Post Goods Issue", "Receive Return", "Adjust Stock", "Record Payment", "Record Shopee Fees"],
+            },
+            {
+              kind: "images",
+              images: [
+                { src: "/images/projects/eis/eis-rea-model.webp", width: 1879, height: 1065, title: "REA Model", desc: "Resource–Event–Agent model linking operational events to inventory, cash, fees, and system actors.", alt: "REA model with resources (Product, Inventory, Cash/Bank, ShopeeFee, Promotion, ShopeeShop), events E1 to E8, and agents such as SalesAdmin, WarehouseStaff, Accountant, Owner, Customer, ShopeePlatform, and LogisticsPartner", zoom: true },
+              ],
+            },
+          ],
+        },
+        {
+          title: "REA → ERD → Relational Database",
+          body: [
+            { kind: "flow", title: "Modelling sequence", steps: ["Business Process", "REA Model", "ERD", "Relational Schema", "MySQL Implementation"] },
+            {
+              kind: "groups",
+              columns: 3,
+              groups: [
+                { label: "Master / reference data", items: ["Product", "Product Category", "Customer", "Warehouse", "Shopee Shop", "Promotion", "Shipping Carrier", "User / Role", "Inventory Balance"] },
+                { label: "Transaction data", items: ["Shopee raw order", "Sales order", "Sales order line", "Inventory reservation", "Inventory transaction", "Delivery", "Return", "Payment", "Payout batch", "Fee line", "Order status history"] },
+                { label: "Query layer", items: ["Sample SQL queries", "Stored-procedure outline (create sales order from raw order)"] },
+              ],
+            },
+            {
+              kind: "images",
+              images: [
+                { src: "/images/projects/eis/eis-er-diagram.webp", width: 1578, height: 1808, title: "ER Diagram", desc: "Relational data model derived from business-process and REA analysis.", alt: "Entity–relationship diagram with tables including sales_order, sales_order_line, inventory_balance, inventory_reservation, inventory_transaction, shopee_order_raw, delivery_document, return_order, payment, payout_batch, fee_line, and order_status_history", zoom: true, narrow: true },
+              ],
+            },
+          ],
+        },
+        {
+          title: "Database Controls & Business Rules",
+          body: [
+            { kind: "metric", value: "6", label: "SQL Triggers", text: "The database is not only storing records; it enforces operational rules and maintains traceability across inventory and order-state changes." },
+            {
+              kind: "numbered",
+              items: [
+                "Prevent negative stock",
+                "Update inventory balance and release reservation",
+                "Increase reserved quantity when inventory is reserved",
+                "Decrease reservation after release / cancellation",
+                "Create RETURN_IN inventory transaction when goods are restocked",
+                "Log sales-order status changes",
+              ],
+            },
+          ],
+        },
+        {
+          title: "Working System Demonstration",
+          body: [
+            { kind: "p", text: "A lightweight backend was implemented to validate the database and business process end to end." },
+            { kind: "chips", label: "Technology", items: ["PHP 8", "Apache / XAMPP", "MySQL", "Bootstrap", "HTML/CSS", "Minimal JavaScript"] },
+            { kind: "chips", label: "Implemented demonstration areas", items: ["Dashboard", "Raw Shopee orders", "Internal sales orders", "Inventory reservation", "Picking / goods issue", "Inventory balance", "Reporting"] },
+            { kind: "note", text: "Shopee order sync uses a simulated Shopee API — it is not connected to the live Shopee platform." },
+            {
+              kind: "images",
+              images: [
+                { src: "/images/projects/eis/eis-raw-orders.webp", width: 1815, height: 1019, title: "Raw Orders", desc: "Simulated Shopee-order import and validation workflow.", alt: "Sales Orders page on the Raw Orders tab listing imported Shopee orders with READY_TO_SHIP or PROCESSED status and an approve action, with a notice that orders are synced from a simulated Shopee API", zoom: true },
+                { src: "/images/projects/eis/eis-picking-post-goods-issue.webp", width: 1815, height: 1019, title: "Picking & Goods Issue", desc: "Warehouse fulfillment workflow linked to inventory transactions and sales-order state changes.", alt: "Picking and Post Goods Issue screen listing confirmed orders with warehouse, item preview, and a Pick & Ship action", zoom: true },
+                { src: "/images/shopee-sales-dashboard.webp", width: 1600, height: 914, title: "Sales performance report", desc: "Revenue trend, best-selling products, and order fulfillment status from the reporting layer.", alt: "Sales performance report with monthly revenue trend, top 5 best-selling products, and order fulfillment status breakdown", zoom: true },
+              ],
+            },
+          ],
+        },
+        {
+          title: "What the Project Demonstrated",
+          body: [
+            { kind: "p", text: "The project demonstrated an end-to-end transition from business-process analysis to conceptual data modelling, relational database design, automated business rules, and a working application layer." },
+            {
+              kind: "bullets",
+              items: ["11-stage order-to-report process", "6-role/system swimlane flow", "8-event REA model", "ERD and relational schema", "6 SQL triggers", "Working PHP/MySQL demonstration"],
+            },
+          ],
+        },
+        {
+          title: "Key Takeaways",
+          body: [
+            {
+              kind: "bullets",
+              items: [
+                "Starting from REA made the ERD follow real business events (orders, shipments, returns, payouts) instead of screens.",
+                "Putting inventory and order-state rules in triggers means the controls hold no matter which process step writes the data.",
+                "Payout reconciliation only works if returns and order states are modelled cleanly upstream.",
+              ],
+            },
+          ],
+        },
       ],
     },
   },
@@ -1279,50 +1360,274 @@ export const caseStudies = [
     slug: "cocoon-crm-solution-design",
     tier: "secondary",
     featured: true,
-    categories: ["ecommerce-crm", "academic"],
-    title: "Cocoon Vietnam CRM Solution Design",
-    roleLine: "Team Leader • CRM / Product Analysis • 2025–2026",
+    categories: ["product-ba", "ecommerce-crm", "academic"],
+    title: "Cocoon Vietnam — CRM & Customer Information System Design",
+    roleLine: "Team Leader • CRM / MIS / Product Analysis • 2025–2026",
     description:
-      "Designed a HubSpot-based CRM solution across Marketing, Sales, and Customer Service, including AS-IS/TO-BE workflows, customer segmentation, sales pipeline, service tickets, and CRM data structure.",
-    metrics: [],
-    tags: ["CRM", "HubSpot", "BRD", "AS-IS / TO-BE"],
+      "Led a 5-person CRM/MIS project translating fragmented omnichannel customer data and manual cross-functional workflows into a phased HubSpot solution design spanning Single Customer View, Marketing–Sales–Service processes, governance, KPI planning, and secure mobile access.",
+    metrics: [
+      { value: "6", label: "Implementation Phases" },
+      { value: "8 Months", label: "Roadmap" },
+      { value: "3", label: "Business Functions" },
+      { value: "5", label: "CRM Record Types" },
+    ],
+    tags: ["CRM", "HubSpot", "MIS", "Product Analysis"],
     detail: {
-      overview: {
-        type: "CRM case study — HubSpot-based solution design",
+      header: {
         role: "Team Leader",
-        timeline: "2025 – 2026",
-        scope: "Marketing, Sales, and Customer Service",
+        subtitle: "From fragmented omnichannel customer data to a governed Single Customer View and measurable cross-functional CRM model.",
+        meta: "Management of Information System • 2025–2026 • 5-person team",
+        techLine: ["HubSpot CRM", "MS Project", "RACI", "Hybrid Stage-Gate"],
+        secondaryLine: ["6 Implementation Phases", "8 Months Planned Roadmap", "3 Business Functions", "5 Core CRM Record Types"],
+        image: {
+          src: "/images/projects/cocoon/cocoon-segmentation.webp",
+          width: 1366,
+          height: 604,
+          alt: "HubSpot segment editor for 'Value-Driven Loyal Skincare Enthusiasts' combining skin type, skin concerns, loyalty segment, and purchase motivation filters with AND logic",
+          caption: "Rule-Based Segmentation — Transparent HubSpot segmentation logic using structured customer attributes (team demonstration).",
+          zoom: true,
+        },
       },
-      context: ["A HubSpot-based CRM case study for Cocoon Vietnam covering Marketing, Sales, and Customer Service."],
-      problem: [
-        "Marketing, sales, and service activities need one customer record and consistent pipelines to be measurable.",
-      ],
-      role: {
-        owned: ["Led the team as Team Leader"],
-        contributed: ["AS-IS / TO-BE workflows, BRD, WBS, RACI, risk register, KPI framework, and functional test cases"],
-        others: ["Academic team project."],
-      },
-      discovery: ["AS-IS workflows across Marketing, Sales, and Customer Service", "Customer segmentation"],
-      design: {
-        flows: [
-          {
-            title: "CRM data structure (HubSpot objects)",
-            steps: ["Contacts", "Companies", "Deals", "Tickets", "Activities"],
-          },
-        ],
-        bullets: ["TO-BE workflows", "Sales pipeline", "Service tickets"],
-      },
-      requirements: ["BRD", "WBS", "RACI", "Risk register", "KPI framework"],
-      validation: ["Functional test cases"],
-      outcome: ["A complete CRM solution design from AS-IS analysis to test cases"],
-      artifacts: [
-        { title: "BRD", desc: "Business requirements across the three functions." },
-        { title: "WBS, RACI & risk register", desc: "Delivery planning artifacts." },
-        { title: "KPI framework", desc: "Measures for marketing, sales, and service." },
-        { title: "Functional test cases", desc: "Validation of the CRM configuration." },
-      ],
-      takeaways: [
-        "Mapping Contacts, Companies, Deals, Tickets, and Activities first kept the three departments on one data model.",
+      sections: [
+        {
+          title: "My Role",
+          highlight: true,
+          body: [
+            { kind: "p", text: "Led project planning and coordination for a 5-person CRM/MIS case study, using MS Project to structure the implementation roadmap and owning final review and quality control. I led the report work covering the business problem, CRM-as-MIS solution design, security/BYOD design, and final recommendations, while the team produced the HubSpot system demonstration." },
+            {
+              kind: "groups",
+              columns: 3,
+              groups: [
+                { label: "Leadership & Planning", items: ["Project planning", "Coordination", "MS Project", "Final review", "Quality control", "Presentation"] },
+                { label: "Business / System Analysis", items: ["Problem analysis", "AS-IS analysis", "CRM-as-MIS design", "Data-governance design", "Cross-functional process design"] },
+                { label: "Governance", items: ["Implementation scope", "Project governance", "Security / BYOD model", "Recommendations"] },
+              ],
+            },
+            { kind: "note", text: "The HubSpot system demonstration — configuration, customer records, B2B company management, and segmentation — was produced by the team; the project’s contribution table assigns the HubSpot CRM demo to another team member." },
+          ],
+        },
+        {
+          title: "Business Context",
+          body: [
+            { kind: "p", text: "Cocoon Vietnam is an omnichannel FMCG skincare brand. Customer interactions happen across many channels, and the proposed solution uses HubSpot CRM as an MIS foundation." },
+            { kind: "chips", label: "Customer touchpoints", items: ["D2C / e-commerce", "Marketplaces", "Social commerce", "Offline POS / retail", "Hotline", "Inbox / customer-service channels"] },
+            {
+              kind: "chips",
+              label: "Core problems",
+              items: ["Fragmented customer data", "Duplicated customer records", "Inconsistent tagging / attribution", "Manual consolidation", "Inconsistent service handling", "Delayed / less reliable reporting", "Weak Single Customer View", "Inconsistent cross-functional handoffs"],
+            },
+          ],
+        },
+        {
+          title: "The AS-IS Problem",
+          body: [
+            { kind: "p", text: "The existing omnichannel operating model depends on manual transfers and disconnected systems." },
+            {
+              kind: "blocks",
+              blocks: [
+                { title: "Data Silos", copy: "Customer and order data distributed across channels." },
+                { title: "Manual Handoffs", copy: "Excel exports, reformatting, offline files and messaging tools." },
+                { title: "Customer-Service Blind Spots", copy: "Support teams lack a unified interaction and order history." },
+                { title: "Management Reporting", copy: "Manual consolidation reduces timeliness and consistency." },
+              ],
+            },
+            {
+              kind: "images",
+              images: [
+                { src: "/images/projects/cocoon/cocoon-as-is-workflow.webp", width: 2000, height: 622, title: "AS-IS Workflow", desc: "Current-state workflow highlighting manual Excel/Zalo handoffs and fragmented customer-service information.", alt: "AS-IS swimlane across Customer, E-commerce Admin, Warehouse, and Customer Support, with manual Excel export, re-formatting, Excel inventory updates, and searching multiple Excel files highlighted as pain points", zoom: true },
+              ],
+            },
+          ],
+        },
+        {
+          title: "CRM as a Management Information System",
+          body: [
+            {
+              kind: "modules",
+              modules: [
+                { num: "01", title: "Omnichannel Sources", items: ["D2C / website", "Marketplaces / social commerce", "POS / retail", "Customer-service channels"] },
+                { num: "02", title: "Integration & Synchronisation", items: ["Mapping", "Logging", "Reconciliation", "Controlled sync"] },
+                { num: "03", title: "HubSpot CRM", items: ["Contacts", "Companies", "Deals", "Tickets", "Activities", "Marketing", "Sales", "Service"] },
+                { num: "04", title: "Dashboards & Reporting", items: ["Data quality", "Pipeline", "Service SLA", "Adoption", "Channel / segment insights"] },
+              ],
+            },
+            { kind: "flow", title: "Core MIS logic", steps: ["Data", "Information", "Decision"] },
+            {
+              kind: "images",
+              images: [
+                { src: "/images/projects/cocoon/cocoon-crm-architecture.webp", width: 904, height: 198, title: "CRM Architecture", desc: "Proposed CRM-as-MIS architecture linking omnichannel sources, controlled integration, HubSpot CRM, and managerial dashboards.", alt: "Architecture diagram: omnichannel sources, API/batch sync integration layer, CRM objects/modules/governance layer, and dashboards and reporting with managerial KPIs", zoom: true },
+              ],
+            },
+          ],
+        },
+        {
+          title: "Structured Customer Data & Single Customer View",
+          body: [
+            { kind: "chips", label: "Business-relevant customer attributes", items: ["Skin type", "Skin concerns", "Loyalty segment", "Purchase motivation", "Repeat-purchase frequency", "Preferred channel", "Product interest"] },
+            { kind: "chips", label: "Why controlled properties matter", items: ["Consistent data entry", "Segmentation", "Reporting", "Governance", "Deduplication", "Auditability"] },
+            {
+              kind: "images",
+              images: [
+                { src: "/images/projects/cocoon/cocoon-customer-data-config.webp", width: 707, height: 559, title: "Customer Data Configuration", desc: "Structured HubSpot customer attributes designed to support consistent segmentation and reporting (team demonstration; personal data redacted).", alt: "HubSpot contact properties showing skin type, skin concerns, preferred shopping channel, product interest, loyalty segment, price sensitivity, skin goals, repeat purchase frequency, and purchase motivation", narrow: true, zoom: true },
+              ],
+            },
+          ],
+        },
+        {
+          title: "Rule-Based Segmentation & Decision Support",
+          body: [
+            { kind: "p", text: "The team demonstrated segmentation using explicit AND/OR rules based on structured customer attributes (shown in the header image)." },
+            { kind: "inline", items: ["Reproducible targeting logic", "Transparent segment rules", "Preview before activation", "Consistent prioritisation", "Measurable campaigns"] },
+          ],
+        },
+        {
+          title: "B2B Account & Relationship Management",
+          body: [
+            { kind: "p", text: "Companies represent retail / organisational partners. Contacts, activities, and deals are linked to company records." },
+            { kind: "inline", items: ["Traceable interaction history", "Ownership", "Pipeline visibility", "Account continuity", "Managerial oversight"] },
+            {
+              kind: "images",
+              images: [
+                { src: "/images/projects/cocoon/cocoon-b2b-partner-management.webp", width: 1162, height: 522, title: "B2B Partner Management", desc: "Company-based partner records providing account ownership and relationship visibility (team demonstration; names and emails redacted).", alt: "HubSpot deal record 'Hasaki x Cocoon – Negotiation for 100 units' with stage, amount, close date, deal activity timeline, and associated contacts", zoom: true },
+              ],
+            },
+          ],
+        },
+        {
+          title: "Marketing → Sales → Service",
+          body: [
+            {
+              kind: "groups",
+              columns: 3,
+              groups: [
+                { label: "Marketing", items: ["Customer segmentation", "Campaign tagging", "Forms", "Basic automation", "Performance visibility"] },
+                { label: "Sales", items: ["Deal pipeline", "Activity logging", "Relationship tracking", "B2B account visibility"] },
+                { label: "Customer Service", items: ["Ticketing", "Prioritisation", "SLA tracking", "Escalation", "Service reporting"] },
+              ],
+            },
+            { kind: "flow", title: "Key TO-BE journeys", steps: ["Campaign-to-Conversion", "Interaction-to-Cash", "Case-to-Resolution"] },
+          ],
+        },
+        {
+          title: "Implementation Roadmap",
+          body: [
+            {
+              kind: "flow",
+              title: "6 sequential phases • approximately 8 months planned",
+              steps: ["Planning", "Requirements Analysis", "System Configuration & Setup", "Integration & Data Migration", "UAT & Training", "Go-Live, Hypercare & Closure"],
+            },
+            { kind: "note", text: "This is an academic implementation plan; the phases were not executed in a live Cocoon deployment." },
+            {
+              kind: "images",
+              images: [
+                { src: "/images/projects/cocoon/cocoon-wbs-phase1-2.webp", width: 818, height: 762, title: "Work Breakdown Structure (Phases 1–2 excerpt)", desc: "Task breakdown with durations, predecessors, and responsible roles from the MS Project plan.", alt: "WBS table for Phase 1 Planning and Phase 2 Requirements Analysis listing tasks, durations, predecessors, resource roles, and milestones", narrow: true, zoom: true },
+              ],
+            },
+          ],
+        },
+        {
+          title: "Governance & Responsibility Design",
+          body: [
+            { kind: "p", text: "The project used RACI to map responsibility and accountability across sponsor, project, analysis, IT, business, and vendor/integration roles." },
+            { kind: "inline", items: ["Clear responsibility", "Approval ownership", "Cross-functional consultation", "Governance at stage gates"] },
+            {
+              kind: "table",
+              caption: "RACI — Phase 1: Planning (excerpt from the project RACI workbook)",
+              columns: ["Activity", "Project Sponsor", "Project Manager", "Business Analyst", "IT Lead", "Vendor CRM", "Marketing Lead", "Sales & E-commerce Lead", "Customer Support Lead", "Vendor Middleware Integration"],
+              rows: [
+                ["1.1 Define project objectives & scope", "A", "R", "R", "C", "", "C", "C", "C", ""],
+                ["1.2 Identify stakeholders & governance", "A", "R", "C", "C", "", "I", "I", "I", ""],
+                ["1.3 Develop & review Project Charter", "A", "R", "C", "C", "", "I", "I", "I", ""],
+                ["1.4 Select CRM Platform & Integration Solution", "A", "R", "R", "R", "", "C", "C", "C", ""],
+                ["1.5 Assign project team roles", "A", "R", "C", "C", "", "C", "C", "C", ""],
+                ["1.6 High-level timeline planning", "A", "R", "C", "C", "", "C", "I", "I", ""],
+                ["1.7 Finalize Budget & ROI Estimation", "A", "R", "C", "C", "C", "C", "C", "C", "C"],
+                ["1.8 Review & Sign Contract", "A", "R", "C", "C", "R", "I", "I", "I", "R"],
+                ["1.9 Project Kick-off Activities & Team Commitment", "A", "R", "C", "C", "C", "C", "C", "C", "C"],
+              ],
+              legend: "R = Responsible • A = Accountable • C = Consulted • I = Informed • – = not involved",
+            },
+          ],
+        },
+        {
+          title: "Risk, Security & BYOD Governance",
+          body: [
+            { kind: "chips", label: "Risk framework", items: ["Process", "Data", "People", "Technology", "External risks"] },
+            { kind: "chips", label: "Proposed BYOD baseline controls", items: ["SSO / MFA", "RBAC / least privilege", "MDM / MAM", "DLP / export governance", "Audit logging", "Monitoring", "Offboarding controls"] },
+            { kind: "note", text: "These controls were designed and proposed as part of the plan — they were not deployed at Cocoon." },
+            {
+              kind: "images",
+              images: [
+                { src: "/images/projects/cocoon/cocoon-risk-assessment.webp", width: 1217, height: 580, title: "Risk Assessment", desc: "Risk assessment across process, data, people, technology, and external factors (Phases 1–3 shown).", alt: "Risk register table for Phases 1 to 3 with risk, cause, category, description, likelihood, impact, score, level, mitigation action, and owner", zoom: true },
+              ],
+            },
+          ],
+        },
+        {
+          title: "Project Planning Baseline",
+          body: [
+            {
+              kind: "blocks",
+              blocks: [
+                { value: "1.1824B VND", title: "Planned Implementation Budget Baseline", copy: "Total of the project budget proposal, including contingency." },
+                { value: "100M VND", title: "Governed Contingency", copy: "Contingency line within the planned budget." },
+              ],
+            },
+            { kind: "note", text: "Project plan / academic baseline — not actual spend, not a Cocoon investment, and not business impact." },
+          ],
+        },
+        {
+          title: "Target KPI Framework",
+          body: [
+            {
+              kind: "table",
+              caption: "Project success criteria (targets)",
+              center: false,
+              columns: ["KPI", "Target"],
+              rows: [
+                ["Customer data integration rate", "Target >90%"],
+                ["Reduction in duplicate records", "Target 80%"],
+                ["Data completeness", "Target >95%"],
+                ["Data error rate", "Target <5%"],
+                ["CRM-process compliance", "Target 90–95%"],
+                ["Legacy-system usage reduction", "Target ≥85%"],
+                ["Average sales-cycle reduction", "Target 20%"],
+                ["Automation of repetitive tasks", "Target >70%"],
+                ["First response time (FRT)", "Target <2 hours"],
+                ["CSAT", "Target ≥90%"],
+              ],
+              legend: "Defined as post-go-live success criteria; not measured project results.",
+            },
+          ],
+        },
+        {
+          title: "Project Deliverables",
+          body: [
+            { kind: "p", text: "Produced a governance-ready CRM/MIS implementation blueprint covering business context, target architecture, data model, cross-functional process design, implementation roadmap, project governance, risk management, change readiness, BYOD security, and a team HubSpot demonstration." },
+            { kind: "inline", items: ["AS-IS / TO-BE workflows", "BRD", "WBS", "RACI", "Risk register", "KPI framework", "Functional test cases"] },
+          ],
+        },
+        {
+          title: "Skills Demonstrated",
+          body: [
+            {
+              kind: "groups",
+              columns: 4,
+              groups: [
+                { label: "Business Analysis", items: ["AS-IS Analysis", "Business Problem Analysis", "CRM Requirements", "Process Analysis", "Data Governance", "Single Customer View", "KPI Framework"] },
+                { label: "Product / System Design", items: ["HubSpot CRM", "CRM Object Model", "Marketing / Sales / Service Workflows", "Segmentation Logic", "B2B Account Model"] },
+                { label: "Project / Governance", items: ["Project Planning", "MS Project", "Hybrid Stage-Gate", "WBS", "RACI", "Risk Management", "Change Management"] },
+                { label: "Security / Governance", items: ["RBAC", "SSO / MFA", "BYOD", "MDM / MAM", "DLP", "Audit / Monitoring"] },
+              ],
+            },
+          ],
+        },
+        {
+          title: "Key Takeaways",
+          body: [
+            { kind: "bullets", items: ["Mapping Contacts, Companies, Deals, Tickets, and Activities first kept the three departments on one data model."] },
+          ],
+        },
       ],
     },
   },
@@ -1383,6 +1688,7 @@ export const skills = {
         "Stakeholder Analysis",
         "Root Cause Analysis",
         "MoSCoW Prioritisation",
+        "RACI / Risk Management",
       ],
     },
     {
@@ -1399,6 +1705,8 @@ export const skills = {
         "REST API / Integration Analysis",
         "Customer Journey Mapping",
         "Information Architecture",
+        "Inventory / Order State Controls",
+        "CRM Data Governance / Single Customer View",
       ],
     },
     {
