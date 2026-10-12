@@ -39,6 +39,29 @@
   }
 }
 
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+  border-radius: 0.6rem;
+}
+
+/* Hide the default <details> marker (Safari) */
+summary::-webkit-details-marker { display: none; }
+
+/* Anchored sections clear the fixed navbar */
+section[id] { scroll-margin-top: 9rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  body::before { animation: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @keyframes mesh-move {
   0% { transform: scale(1) translate(0, 0); }
   50% { transform: scale(1.1) translate(5%, 5%); }
@@ -51,7 +74,17 @@
     background-color: transparent !important; /* Buộc tất cả section phải trong suốt */
   }
 
-  .main-container { @apply max-w-[1240px] mx-auto px-10 md:px-14; }
+  .main-container { @apply max-w-[1240px] mx-auto px-[1.6rem] sm:px-10 md:px-14; }
+
+  /* Small section label above headings */
+  .eyebrow {
+    @apply text-blue-600 font-bold tracking-[0.2em] uppercase text-[1.3rem];
+  }
+
+  /* Metric chip: value + label */
+  .metric-chip {
+    @apply flex flex-col rounded-2xl border border-slate-200 bg-white px-5 py-4;
+  }
 
   /* Section Title chuẩn BA */
   .section-title {

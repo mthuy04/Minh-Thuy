@@ -1,145 +1,122 @@
 // src/components/Experience.js
 "use client";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  Briefcase,
-  Building2,
-  CheckCircle2,
-  Calendar,
-  Star,
-  Zap,
-  Users,
-  FileText
-} from "lucide-react";
+import { Briefcase, Calendar, CheckCircle2, ArrowRight } from "lucide-react";
+import { experience, experienceIntro } from "@/data/portfolio";
 
-const experiences = [
-  {
-    role: "Operations & Process Improvement Lead",
-    company: "Our Homestay and Studio",
-    period: "Jan 2024 - Present",
-    scope: "Requirement discovery • Process mapping • SOP standardization • KPI tracking • Service quality",
-    desc: "Managing a 34-unit premium service chain and translating operational pain points into clearer workflows, SOPs, checklists, and service-performance controls.",
-    highlights: [
-      "Mapped end-to-end check-in and housekeeping workflows, including handoffs and exception scenarios, and standardized SOPs that supported 85–90% occupancy.",
-      "Redesigned check-in protocols and introduced staff acceptance checklists, reducing customer wait time by 20%.",
-      "Defined service-quality KPIs and built a weekly operations dashboard in Sheets/Excel, sustaining a 5.0/5.0 rating on OTA platforms.",
-      "Documented incident playbooks for late check-in and overbooking cases to reduce rework and improve cross-team consistency."
-    ],
-    deliverables: ["Process Flows", "SOP Documents", "Acceptance Checklists", "KPI Dashboards"]
-  }
-];
+function MetricChips({ metrics }) {
+  return (
+    <ul className="flex flex-wrap gap-2.5 mb-6" aria-label="Key metrics">
+      {metrics.map((m) => (
+        <li
+          key={m}
+          className="px-3.5 py-1.5 bg-white text-slate-900 text-[1.35rem] font-bold rounded-xl border border-slate-200"
+        >
+          {m}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 bg-white relative overflow-hidden">
+    <section id="experience" className="py-24 relative overflow-hidden">
       <div className="main-container">
         <div className="flex flex-col items-center mb-16 text-center">
-          <span className="text-blue-600 font-black tracking-[0.3em] uppercase text-[0.9rem] mb-3">
-            / Professional Experience
-          </span>
-          <h2 className="text-[3.5rem] md:text-[4.5rem] font-black tracking-tighter text-slate-900 leading-none">
-            Work <span className="text-blue-600">Experience.</span>
+          <p className="eyebrow mb-3">Professional Experience</p>
+          <h2 className="text-[4rem] md:text-[5.6rem] font-black tracking-tighter text-slate-900 leading-none mb-5">
+            Experience<span className="text-blue-600">.</span>
           </h2>
+          <p className="max-w-[640px] text-[1.7rem] text-slate-600 leading-relaxed">{experienceIntro}</p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          {experiences.map((exp, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative pl-12 border-l-4 border-blue-100"
+        <ol className="max-w-[1000px] mx-auto flex flex-col gap-12">
+          {experience.map((exp) => (
+            <motion.li
+              key={exp.company}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              className="relative pl-8 md:pl-14 border-l-4 border-blue-100"
             >
-              <div className="absolute -left-[1.65rem] top-0 w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-lg border border-blue-50">
-                <Briefcase size={20} />
+              <div
+                className="absolute -left-[1.6rem] top-0 w-11 h-11 md:w-12 md:h-12 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-lg border border-blue-50"
+                aria-hidden="true"
+              >
+                <Briefcase size={18} />
               </div>
 
-              <div className="bg-slate-50/50 p-10 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-blue-50 transition-all">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+              <article className="bg-white/80 backdrop-blur p-6 md:p-10 rounded-[2.4rem] md:rounded-[3rem] border border-slate-100 shadow-sm">
+                {/* Header */}
+                <header className="flex flex-col md:flex-row md:items-start justify-between gap-3 md:gap-6 mb-6">
                   <div>
-                    <h3 className="text-[2.1rem] font-black text-slate-900 leading-tight">
+                    <h3 className="text-[2.2rem] md:text-[2.6rem] font-black text-slate-900 leading-tight">
                       {exp.role}
                     </h3>
-                    <div className="flex items-center gap-2 text-blue-600 font-bold text-[1.3rem] mt-1">
-                      <Building2 size={18} />
-                      {exp.company} (34 Units)
-                    </div>
+                    <p className="text-blue-600 font-bold text-[1.6rem] md:text-[1.7rem] mt-1">{exp.company}</p>
                   </div>
+                  <p className="flex items-center gap-2 px-4 py-2 bg-slate-50 rounded-xl border border-slate-100 text-[1.4rem] font-bold text-slate-600 whitespace-nowrap w-fit">
+                    <Calendar size={14} aria-hidden="true" />
+                    {exp.dates}
+                  </p>
+                </header>
 
-                  <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-xl border border-slate-100 text-[1rem] font-bold text-slate-400">
-                    <Calendar size={14} />
-                    {exp.period}
-                  </div>
+                {/* Scopes */}
+                <div className="grid gap-5">
+                  {exp.scopes.map((scope, sIdx) => {
+                    const boxed = exp.scopes.length > 1 || scope.title;
+                    return (
+                      <div
+                        key={scope.title || sIdx}
+                        className={boxed ? "bg-slate-50/70 rounded-[2rem] border border-slate-100 p-5 md:p-7" : ""}
+                      >
+                        {scope.title && (
+                          <div className="mb-4">
+                            {exp.scopes.length > 1 && (
+                              <p className="text-[1.25rem] font-bold text-slate-500 uppercase tracking-[0.14em] mb-1">
+                                Scope {sIdx + 1}
+                              </p>
+                            )}
+                            <h4 className="text-[1.9rem] md:text-[2.1rem] font-black text-slate-900 leading-snug">
+                              {scope.title}
+                            </h4>
+                            <p className="text-[1.45rem] font-semibold text-slate-600 mt-1">
+                              {scope.type}
+                              {scope.dates && <span className="text-slate-500"> • {scope.dates}</span>}
+                            </p>
+                          </div>
+                        )}
+
+                        <MetricChips metrics={scope.metrics} />
+
+                        <ul className="flex flex-col gap-4">
+                          {scope.bullets.map((b) => (
+                            <li key={b} className="flex items-start gap-3 text-[1.55rem] md:text-[1.6rem] text-slate-700 leading-[1.6]">
+                              <CheckCircle2 size={18} className="text-blue-500 mt-[0.35rem] shrink-0" aria-hidden="true" />
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        {scope.caseStudy && (
+                          <Link
+                            href={`/case-studies/${scope.caseStudy}`}
+                            className="inline-flex items-center gap-2 mt-6 text-[1.45rem] font-bold text-blue-600 hover:text-slate-900 transition-colors"
+                          >
+                            View case study <span className="sr-only">: {scope.title}</span>
+                            <ArrowRight size={16} aria-hidden="true" />
+                          </Link>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
-
-                <p className="text-[1rem] font-black text-blue-600 uppercase tracking-widest mb-4 bg-blue-50 w-fit px-4 py-1.5 rounded-lg border border-blue-100">
-                  Scope: {exp.scope}
-                </p>
-
-                <p className="text-[1.15rem] text-slate-500 font-medium leading-relaxed mb-8">
-                  {exp.desc}
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-                  {exp.highlights.map((item, i) => (
-                    <div key={i} className="flex items-start gap-3 text-[1.15rem] font-bold text-slate-600 leading-snug">
-                      <CheckCircle2 size={18} className="text-blue-500 mt-1 shrink-0" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap items-center gap-4 pt-8 border-t border-slate-200">
-                  <span className="text-[0.95rem] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <FileText size={16} />
-                    Key Deliverables
-                  </span>
-                  {exp.deliverables.map((d) => (
-                    <span
-                      key={d}
-                      className="px-3 py-1 bg-white text-slate-900 text-[0.85rem] font-black rounded-lg border border-slate-200 uppercase"
-                    >
-                      {d}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+              </article>
+            </motion.li>
           ))}
-        </div>
-
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <div className="p-8 bg-slate-900 rounded-[2rem] text-center shadow-xl group hover:bg-blue-600 transition-all duration-500">
-            <div className="flex justify-center mb-2 text-blue-400 group-hover:text-white">
-              <Users size={24} />
-            </div>
-            <div className="text-[3rem] font-black text-white">85–90%</div>
-            <p className="text-[0.9rem] font-bold text-white/50 uppercase tracking-widest mt-2">
-              Occupancy (Ops KPI)
-            </p>
-          </div>
-
-          <div className="p-8 bg-white rounded-[2rem] text-center shadow-md border border-slate-100">
-            <div className="flex justify-center mb-2 text-blue-600">
-              <Zap size={24} />
-            </div>
-            <div className="text-[3rem] font-black text-slate-900">20% ↓</div>
-            <p className="text-[0.9rem] font-bold text-slate-400 uppercase tracking-widest mt-2">
-              Wait Time Reduction
-            </p>
-          </div>
-
-          <div className="p-8 bg-slate-900 rounded-[2rem] text-center shadow-xl group hover:bg-blue-600 transition-all duration-500">
-            <div className="flex justify-center mb-2 text-blue-400 group-hover:text-white">
-              <Star size={24} />
-            </div>
-            <div className="text-[3rem] font-black text-white">5.0/5.0</div>
-            <p className="text-[0.9rem] font-bold text-white/50 uppercase tracking-widest mt-2">
-              OTA Rating
-            </p>
-          </div>
-        </div>
+        </ol>
       </div>
     </section>
   );
