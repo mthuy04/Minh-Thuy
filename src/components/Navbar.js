@@ -2,7 +2,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Download, Menu, X } from "lucide-react";
 import { navLinks, profile } from "@/data/portfolio";
 
@@ -10,11 +10,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
-  const [hoveredLink, setHoveredLink] = useState(null);
 
-  // Sticky effect
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
+    const handleScroll = () => setScrolled(window.scrollY > 8);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -30,12 +28,10 @@ export default function Navbar() {
       },
       { root: null, rootMargin: "-40% 0px -40% 0px", threshold: 0 }
     );
-
     navLinks.forEach((link) => {
       const element = document.getElementById(link.id);
       if (element) observer.observe(element);
     });
-
     return () => observer.disconnect();
   }, []);
 
@@ -50,83 +46,67 @@ export default function Navbar() {
   return (
     <nav
       aria-label="Primary"
-      className={`fixed top-0 w-full z-[100] flex justify-center transition-all duration-500 ${
-        scrolled ? "pt-4" : "pt-6 md:pt-8"
+      className={`fixed top-0 inset-x-0 z-[100] transition-colors duration-300 ${
+        scrolled || isOpen
+          ? "bg-white/90 backdrop-blur-md border-b border-divider shadow-nav"
+          : "bg-page/80 backdrop-blur-sm border-b border-transparent"
       }`}
     >
-      {/* Floating pill container */}
-      <div
-        className={`flex items-center justify-between transition-all duration-500 px-5 md:px-8 py-3 rounded-full border border-slate-200/40 ${
-          scrolled || isOpen
-            ? "w-[94%] max-w-[1240px] bg-white/90 backdrop-blur-2xl shadow-2xl shadow-blue-900/5"
-            : "w-[95%] max-w-[1300px] bg-white/60 backdrop-blur-md xl:bg-transparent xl:backdrop-blur-none border-transparent"
-        }`}
-      >
+      <div className="main-container flex items-center justify-between h-[6.8rem]">
         {/* Wordmark */}
         <Link
           href="/"
           aria-label={`${profile.name} — home`}
-          className="text-[2.4rem] font-black tracking-tighter text-slate-900"
+          className="text-[2.2rem] font-[750] tracking-[-0.03em] text-ink"
         >
           {profile.wordmark}
         </Link>
 
         {/* Desktop menu */}
-        <div className="hidden xl:flex items-center gap-1 relative bg-slate-50/60 p-1.5 rounded-full border border-slate-200/40">
+        <ul className="hidden xl:flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
-              <a
-                key={link.id}
-                href={`/#${link.id}`}
-                aria-current={isActive ? "true" : undefined}
-                onMouseEnter={() => setHoveredLink(link.id)}
-                onMouseLeave={() => setHoveredLink(null)}
-                className={`relative px-4 py-2.5 text-[1.3rem] font-bold transition-colors duration-300 uppercase tracking-wider z-10 rounded-full ${
-                  isActive ? "text-blue-600" : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                {link.name}
-                {isActive && (
-                  <motion.span
-                    layoutId="active-pill"
-                    className="absolute inset-0 bg-white shadow-md rounded-full -z-10 border border-slate-100"
-                    transition={{ type: "spring", bounce: 0.1, duration: 0.5 }}
+              <li key={link.id}>
+                <a
+                  href={`/#${link.id}`}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`relative block px-3.5 py-2 text-[1.45rem] font-medium transition-colors duration-200 ${
+                    isActive ? "text-cobalt" : "text-body hover:text-ink"
+                  }`}
+                >
+                  {link.name}
+                  <span
+                    className={`absolute left-3.5 right-3.5 -bottom-0.5 h-[2px] rounded-full bg-cobalt transition-opacity duration-200 ${
+                      isActive ? "opacity-100" : "opacity-0"
+                    }`}
+                    aria-hidden="true"
                   />
-                )}
-                {hoveredLink === link.id && !isActive && (
-                  <motion.span
-                    layoutId="hover-bg"
-                    className="absolute inset-0 bg-white/60 rounded-full -z-10"
-                    transition={{ type: "spring", bounce: 0, duration: 0.3 }}
-                  />
-                )}
-              </a>
+                </a>
+              </li>
             );
           })}
-        </div>
+        </ul>
 
         <div className="flex items-center gap-3">
-          {/* Download CV */}
           <a
             href={profile.cvUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-2.5 bg-slate-900 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-bold text-[1.4rem] transition-colors shadow-xl shadow-slate-200"
+            className="hidden md:inline-flex btn-primary !px-5 !py-[1rem] !text-[1.4rem]"
           >
-            <Download size={16} strokeWidth={3} aria-hidden="true" /> Download CV
+            <Download size={15} strokeWidth={2.5} aria-hidden="true" /> Download CV
           </a>
 
-          {/* Mobile menu toggle */}
           <button
             type="button"
-            className="xl:hidden p-3 bg-white rounded-2xl shadow-sm border border-slate-100 text-slate-900"
+            className="xl:hidden p-2.5 rounded-btn border border-line bg-white text-ink"
             onClick={() => setIsOpen(!isOpen)}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
             aria-label={isOpen ? "Close menu" : "Open menu"}
           >
-            {isOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+            {isOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
           </button>
         </div>
       </div>
@@ -136,31 +116,32 @@ export default function Navbar() {
         {isOpen && (
           <motion.div
             id="mobile-menu"
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.97 }}
-            className="absolute top-[8.4rem] w-[94%] max-h-[calc(100vh-10rem)] overflow-y-auto bg-white/98 backdrop-blur-3xl rounded-[2.4rem] border border-slate-100 p-8 flex flex-col gap-2 xl:hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] z-50"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2 }}
+            className="xl:hidden border-t border-divider bg-white max-h-[calc(100vh-6.8rem)] overflow-y-auto"
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.id}
-                href={`/#${link.id}`}
-                onClick={() => setIsOpen(false)}
-                className={`text-[2.2rem] font-black py-2 transition-colors ${
-                  activeSection === link.id ? "text-blue-600" : "text-slate-700 hover:text-slate-900"
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
-            <a
-              href={profile.cvUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 bg-blue-600 text-white py-5 rounded-2xl text-center text-[1.8rem] font-black flex items-center justify-center gap-3"
-            >
-              <Download size={20} aria-hidden="true" /> Download CV
-            </a>
+            <ul className="main-container py-4">
+              {navLinks.map((link) => (
+                <li key={link.id} className="border-b border-divider last:border-0">
+                  <a
+                    href={`/#${link.id}`}
+                    onClick={() => setIsOpen(false)}
+                    className={`block py-4 text-[1.8rem] font-medium ${
+                      activeSection === link.id ? "text-cobalt" : "text-ink"
+                    }`}
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+              <li className="pt-5 pb-3">
+                <a href={profile.cvUrl} target="_blank" rel="noopener noreferrer" className="btn-primary w-full">
+                  <Download size={17} aria-hidden="true" /> Download CV
+                </a>
+              </li>
+            </ul>
           </motion.div>
         )}
       </AnimatePresence>
