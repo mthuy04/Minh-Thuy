@@ -23,7 +23,7 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", fontSize: 44, fontWeight: 900, letterSpacing: -2 }}>
-          Minh<span style={{ color: "#2563eb" }}>Thuy</span>.
+          {profile.wordmark}
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>

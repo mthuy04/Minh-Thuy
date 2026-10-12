@@ -1,7 +1,7 @@
 // src/components/Footer.js
 import Link from "next/link";
 import { Linkedin, Mail, Github } from "lucide-react";
-import { contact, footer } from "@/data/portfolio";
+import { contact, footer, profile } from "@/data/portfolio";
 
 export default function Footer() {
   return (
@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="main-container flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
         <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6">
           <Link href="/" className="text-[2rem] font-black tracking-tight">
-            Minh<span className="text-blue-400">Thuy</span>.
+            {profile.wordmark}
           </Link>
           <p className="text-[1.4rem] font-semibold text-slate-300">{footer.left}</p>
         </div>

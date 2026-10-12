@@ -8,9 +8,9 @@ export const profile = {
   positioning: "Business Analyst | SaaS • E-commerce • AI-enabled Products",
   location: "Hanoi, Vietnam",
   siteUrl: "https://minh-thuy-navy.vercel.app",
-  // NOTE: this Drive file is titled "NguyenMinhThuy_BA_Intern_CV.pdf".
-  // Replace with the current Business Analyst CV link when available.
-  cvUrl: "https://drive.google.com/file/d/159n4kkJE5jbHEwcRV-7o8-yolcLSSeHv/view?usp=sharing",
+  wordmark: "Jade",
+  // Current CV, served from public/cv/
+  cvUrl: "/cv/NguyenMinhThuy_ITBA_CV.pdf",
   portrait: {
     src: "/images/minh-thuy-white-blazer.webp",
     width: 1122,

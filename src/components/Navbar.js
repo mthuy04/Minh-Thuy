@@ -68,7 +68,7 @@ export default function Navbar() {
           aria-label={`${profile.name} — home`}
           className="text-[2.4rem] font-black tracking-tighter text-slate-900"
         >
-          Minh<span className="text-blue-600">Thuy</span>.
+          {profile.wordmark}
         </Link>
 
         {/* Desktop menu */}
